@@ -2,7 +2,7 @@
 
 namespace CSVJSONLib
 {
-	internal struct CSVAddress
+	public struct CSVAddress
 	{
 		private int col;
 
@@ -15,19 +15,39 @@ namespace CSVJSONLib
 		public int Column { get; internal set; }
 		public int Row { get; internal set; }
 
-		internal bool IsStandAlone(string[,] csvReport)
+		public bool IsStandAlone(string[,] csvReport)
 		{
-			throw new NotImplementedException();
+			return !IsLeftLabel(csvReport) &&
+				   !IsTableHeader(csvReport) &&
+				   !IsTopLabel(csvReport);
 		}
 
-		internal bool IsTopLabel(string[,] csvReport)
+		public bool IsTopLabel(string[,] csvReport)
 		{
-			throw new NotImplementedException();
+			bool result = csvReport.GetLength(0) < this.Row &&
+						  csvReport[this.Row + 1, this.Column].IsNumeric();
+			return result;
 		}
 
-		internal bool IsLeftLabel(string[,] csvReport)
+		public bool IsValid(string[,] csvReport)
+        {
+			return this.Row < csvReport.GetLength(0) && this.Column < csvReport.GetLength(1);
+        }
+
+		public bool IsLeftLabel(string[,] csvReport)
 		{
-			throw new NotImplementedException();
+			bool result = csvReport.GetLength(1) < this.Column + 1 &&
+						  csvReport[this.Row, this.Column + 1].IsNumeric(); 
+
+			return result;
 		}
+
+		public bool IsTableHeader(string[,] csvReport)
+        {
+			bool result = csvReport.GetLength(1) < this.Column + 2 &&
+						  csvReport[this.Row, this.Column + 1] != string.Empty &&
+						  csvReport[this.Row, this.Column + 2] != string.Empty;
+			return result;
+        }
 	}
 }

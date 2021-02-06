@@ -101,7 +101,7 @@ namespace CSVJSONLib
 						}
 
 						//If the cell is part of a table
-						if (IsTableHeader(row, col))
+						if (address.IsTableHeader(CsvReport))
 						{
 							CSVTable table = CSVTable.FindTable(row, col, CsvReport);
 
@@ -148,11 +148,6 @@ namespace CSVJSONLib
 			}
 
 			return _reportContainer;
-		}
-
-		private bool IsTableHeader(int row, int csvReport)
-		{
-			throw new NotImplementedException();
 		}
 
 		private void MarkInspected(CSVAddress address)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSVJSONLib
 {
-	public static class StringExtensions
+	public static class StringHelpers
 	{
 		public static string[] DoubleQuoteSplit(this string text, string delimiter)
 		{
@@ -36,5 +36,10 @@ namespace CSVJSONLib
 
 			return result;
 		}
+
+		public static bool IsNumeric(this string text)
+        {
+			return int.TryParse(text, out int number);
+        }
 	}
 }
