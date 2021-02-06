@@ -68,13 +68,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application.cs" />
-    <Compile Include="Containerization.cs" />
-    <Compile Include="IApplication.cs" />
-    <Compile Include="ISwitchArgs.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Init Classes\Application.cs" />
+    <Compile Include="Init Classes\Containerization.cs" />
+    <Compile Include="Init Classes\IApplication.cs" />
+    <Compile Include="Init Classes\ISwitchArgs.cs" />
+    <Compile Include="Init Classes\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SwitchArgs.cs" />
+    <Compile Include="Init Classes\SwitchArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

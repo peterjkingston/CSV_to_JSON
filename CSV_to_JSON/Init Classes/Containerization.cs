@@ -14,7 +14,7 @@ namespace CSV_to_JSON
 			var builder = new ContainerBuilder();
 
 			ISwitchArgs switchArgs = new SwitchArgs(args);
-
+			builder.RegisterInstance(switchArgs).As<ISwitchArgs>();
 			builder.RegisterType<Application>().As<IApplication>();
 
 			return builder.Build();
