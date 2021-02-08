@@ -26,5 +26,21 @@ namespace CSVJSONLib
 				}
 			}
 		}
+
+		public static T[] Append<T>(this T[] array, T[] appendArray)
+        {
+			T[] newArray = new T[array.Length + appendArray.Length];
+
+			for(int i = 0; i < array.Length; i++)
+            {
+				newArray[i] = array[i];
+            }
+			for(int i = array.Length; i < newArray.Length; i++)
+            {
+				newArray[i] = appendArray[i];
+            }
+
+			return newArray;
+        }
 	}
 }

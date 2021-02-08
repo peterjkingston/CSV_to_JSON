@@ -8,24 +8,43 @@ namespace CSVJSONLib
 {
     public class ReportContainer : IReportContainer
     {
-        public void AddProperty(string v, Func<char[], string> trim)
+        private IUniqueNameProvider _nameProvider;
+
+        public Dictionary<string, string> Properties { get; private set; }
+        public Dictionary<string, CSVTable> Tables { get; private set; }
+
+        public ReportContainer(IUniqueNameProvider nameProvider)
         {
-            throw new NotImplementedException();
+            _nameProvider = nameProvider;
         }
 
-        public void AddProperty(string cell, string v)
+        public void AddProperty(string propertyName, string propertyValue)
         {
-            throw new NotImplementedException();
+            string[] existingNames = GetExistingNames();
+            Properties.Add(_nameProvider.GetUniqueName(existingNames, propertyName), propertyValue);
         }
 
-        public void AddProperty(string cell)
+        private string[] GetExistingNames()
         {
-            throw new NotImplementedException();
+            return Properties.Keys.ToArray().Append(Tables.Keys.ToArray());
+        }
+
+        public void AddProperty(string propertyValue)
+        {
+            string[] existingNames = GetExistingNames();
+            Properties.Add(_nameProvider.GetUniqueName(existingNames), propertyValue);
+        }
+
+        public void AddTable(string tableName, CSVTable table)
+        {
+            string[] existingNames = GetExistingNames();
+            Tables.Add(_nameProvider.GetUniqueName(existingNames, tableName), table);
         }
 
         public void AddTable(CSVTable table)
         {
-            throw new NotImplementedException();
+            string[] existingNames = GetExistingNames();
+            Tables.Add(_nameProvider.GetUniqueName(existingNames), table);
         }
     }
 }

@@ -88,7 +88,7 @@ namespace CSVJSONLib
 						if (cell.Split(':').Length == 2)
 						{
 							string[] parts = cell.Split(':');
-							_reportContainer.AddProperty(parts[0].Trim(), parts[1].Trim);
+							_reportContainer.AddProperty(parts[0].Trim(), parts[1].Trim());
 							_inspected[row, col] = true;
 							continue;
 						}

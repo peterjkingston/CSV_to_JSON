@@ -46,9 +46,11 @@
     <Compile Include="CSVReportReader.cs" />
     <Compile Include="CSVTable.cs" />
     <Compile Include="IReportContainer.cs" />
+    <Compile Include="IUniqueNameProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\StringHelpers.cs" />
     <Compile Include="ReportContainer.cs" />
+    <Compile Include="UniqueNameProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
