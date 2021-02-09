@@ -49,6 +49,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dummy Classes\Dummy_CSVAddress.cs" />
+    <Compile Include="Dummy Classes\Dummy_CSVTable.cs" />
+    <Compile Include="Dummy Classes\Dummy_CSVReportReader.cs" />
+    <Compile Include="Dummy Classes\Dummy_ReportContainer.cs" />
+    <Compile Include="Dummy Classes\Dummy_UniqueNameProvider.cs" />
     <Compile Include="Test_CSVAddress.cs" />
     <Compile Include="Test_CSVReportReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,6 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSVJSONLib\CSVJSONLib.csproj">
+      <Project>{e23ffeb3-b8af-4d09-adce-90d52b886f0d}</Project>
+      <Name>CSVJSONLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
