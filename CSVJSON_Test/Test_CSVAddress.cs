@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using CSVJSONLib;
 
 namespace CSVJSON_Test
 {
@@ -10,14 +11,13 @@ namespace CSVJSON_Test
         public void IsStandAlone_True_NoLabelLeft()
         {
             //Arrange
-
+            CSVAddress csvAddress = new CSVAddress();
 
             //Act
 
 
             //Assert
             throw new NotImplementedException();
-
         }
 
         [TestMethod]
