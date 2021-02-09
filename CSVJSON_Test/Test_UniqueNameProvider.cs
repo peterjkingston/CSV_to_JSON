@@ -10,5 +10,30 @@ namespace CSVJSON_Test
     [TestClass]
     public class Test_UniqueNameProvider
     {
+        [TestMethod]
+        public void GetUniqueNameStrArryStr_NoRepeat()
+        {
+            //Arrange
+
+
+            //Act
+
+
+            //Assert
+            throw new NotImplementedException();
+        }
+
+        [TestMethod]
+        public void GetUniqueNameStrArry_NoRepeat()
+        {
+            //Arrange
+
+
+            //Act
+
+
+            //Assert
+            throw new NotImplementedException();
+        }
     }
 }
