@@ -10,7 +10,6 @@ namespace CSVJSON_Test
     [TestClass]
     public class Test_CSVTable
     {
-
         [TestMethod]
         public void FindTable_CSVTable_MatchesTableStandard()
         {
@@ -38,7 +37,7 @@ namespace CSVJSON_Test
         }
 
         [TestMethod]
-        public void MyTestMethod()
+        public void FindTable_BlankAndZeroRows_Ignored()
         {
             //Arrange
 

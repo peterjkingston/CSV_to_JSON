@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using CSVJSONLib;
+using CSVJSON_Test.Resources;
 
 namespace CSVJSON_Test
 {
@@ -11,13 +12,41 @@ namespace CSVJSON_Test
         public void IsStandAlone_True_NoLabelLeft()
         {
             //Arrange
-            CSVAddress csvAddress = new CSVAddress();
+            CSVAddress csvAddress = new CSVAddress(8,1);
+            bool expected = true;
 
             //Act
+            bool actual = csvAddress.IsStandAlone(TEST_CONSTANTS.DUMMY_CSVSTRING_ARRAY);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        public void IsStandAlone_EdgeColumn_NoError()
+        {
+            //Arrange
+            CSVAddress csvAddress = new CSVAddress(7, 0);
+
+            //Act
+            bool success = csvAddress.IsStandAlone(TEST_CONSTANTS.DUMMY_CSVSTRING_ARRAY);
 
 
             //Assert
-            throw new NotImplementedException();
+            Assert.IsTrue(success);
+        }
+
+		[TestMethod]
+		public void IsStandAlone_EdgeRow_NoError()
+		{
+            //Arrange
+            CSVAddress csvAddress = new CSVAddress(0, 4);
+
+            //Act
+            bool success = csvAddress.IsStandAlone(TEST_CONSTANTS.DUMMY_CSVSTRING_ARRAY);
+
+
+            //Assert
+            Assert.IsTrue(success);
         }
 
         [TestMethod]
@@ -96,7 +125,6 @@ namespace CSVJSON_Test
 
             //Assert
             throw new NotImplementedException();
-
         }
 
         [TestMethod]
@@ -110,8 +138,18 @@ namespace CSVJSON_Test
 
             //Assert
             throw new NotImplementedException();
-
         }
+
+		[TestMethod]
+		public void IsTopLabel_EdgeRow_NoError()
+		{
+			//Arrange 
+
+			//Act 
+
+			//Assert
+			Assert.Inconclusive();
+		}
 
         [TestMethod]
         public void IsValid_True_RowWithinReport()
@@ -196,6 +234,17 @@ namespace CSVJSON_Test
             throw new NotImplementedException();
 
         }
+
+		[TestMethod]
+		public void IsLeftLabel_EdgeColumn_NoError()
+		{
+			//Arrange 
+
+			//Act 
+
+			//Assert
+			Assert.Inconclusive();
+		}
 
         [TestMethod]
         public void IsTableHeader_True_ObeysTableStandard()

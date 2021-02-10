@@ -54,6 +54,7 @@
     <Compile Include="Dummy Classes\Dummy_CSVReportReader.cs" />
     <Compile Include="Dummy Classes\Dummy_ReportContainer.cs" />
     <Compile Include="Dummy Classes\Dummy_UniqueNameProvider.cs" />
+    <Compile Include="Resources\TEST_CONSTANTS.cs" />
     <Compile Include="Test_CSVAddress.cs" />
     <Compile Include="Test_CSVReportReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\DUMMY_JSON_REPORT.json" />
     <None Include="Resources\Sample Report.csv" />
   </ItemGroup>
   <ItemGroup>
