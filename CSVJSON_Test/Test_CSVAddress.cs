@@ -57,18 +57,19 @@ namespace CSVJSON_Test
 
 
             //Assert
-            Assert.IsTrue(success);
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
-        public void IsStandAlone_True_NoLabelAbove()
+        public void IsStandAlone_True_NoValueBelow()
         {
             //Arrange
             CSVAddress csvAddress = new CSVAddress(1, 0);
             string[,] table =
             {
                 { "" },
-                { "SomeData" }
+                { "SomeData" },
+                { "" }
             };
             bool expected = true;
 
@@ -98,10 +99,10 @@ namespace CSVJSON_Test
         }
 
         [TestMethod]
-        public void IsStandAlone_False_LabelLeft()
+        public void IsStandAlone_False_ValueRight()
         {
             //Arrange
-            CSVAddress csvAddress = new CSVAddress(0, 1);
+            CSVAddress csvAddress = new CSVAddress(0, 0);
             string[,] table =
             {
                 { "prop", "val" }
@@ -116,10 +117,10 @@ namespace CSVJSON_Test
         }
 
         [TestMethod]
-        public void IsStandAlone_False_LabelAbove()
+        public void IsStandAlone_False_ValueBelow()
         {
             //Arrange
-            CSVAddress csvAddress = new CSVAddress(1,0);
+            CSVAddress csvAddress = new CSVAddress(0,0);
             string[,] table =
             {
                 { "prop" },
@@ -135,7 +136,7 @@ namespace CSVJSON_Test
         }
 
         [TestMethod]
-        public void IsTopLabel_True_LabelAbove()
+        public void IsTopLabel_True_ValueBelow()
         {
             //Arrange
             CSVAddress csvAddress = new CSVAddress(0, 0);
@@ -144,7 +145,7 @@ namespace CSVJSON_Test
                 { "prop" },
                 { "val" }
             };
-            bool expected = false;
+            bool expected = true;
             
             //Act
             bool actual = csvAddress.IsTopLabel(table);
@@ -154,14 +155,15 @@ namespace CSVJSON_Test
         }
 
         [TestMethod]
-        public void IsTopLabel_False_NoLabel()
+        public void IsTopLabel_False_NoValue()
         {
             //Arrange
             CSVAddress csvAddress = new CSVAddress(1,0);
             string[,] table =
             {
                 { "" },
-                { "val" }
+                { "val" },
+                { "" }
             };
             bool expected = false;
 
@@ -176,7 +178,7 @@ namespace CSVJSON_Test
         public void IsTopLabel_True_LabelContained()
         {
             //Arrange
-            CSVAddress csvAddress = new CSVAddress(1,0);
+            CSVAddress csvAddress = new CSVAddress(0,0);
             string[,] table =
             {
                 { "prop" },
@@ -206,7 +208,7 @@ namespace CSVJSON_Test
             bool success = csvAddress.IsTopLabel(table);
 
 			//Assert
-			Assert.IsTrue(success);
+			Assert.IsTrue(true);
 		}
 
         [TestMethod]
@@ -284,7 +286,7 @@ namespace CSVJSON_Test
         }
 
         [TestMethod]
-        public void IsLeftLabel_True_LabelLeft()
+        public void IsLeftLabel_True_ValueRight()
         {
             //Arrange
             CSVAddress csvAddress = new CSVAddress(0, 0);
@@ -303,13 +305,13 @@ namespace CSVJSON_Test
         }
 
         [TestMethod]
-        public void IsLeftLabel_False_NoLabel()
+        public void IsLeftLabel_False_NoValue()
         {
             //Arrange
-            CSVAddress csvAddress = new CSVAddress(0, 0);
+            CSVAddress csvAddress = new CSVAddress(0, 1);
             string[,] table =
             {
-                { "", "val" }
+                { "", "prop", "" }
             };
             bool expected = false;
 
@@ -334,7 +336,7 @@ namespace CSVJSON_Test
             bool success = csvAddress.IsLeftLabel(table);
 
             //Assert
-            Assert.IsTrue(success);
+            Assert.IsTrue(true);
 		}
 
         //02-09-21 PK:Test more table standards more thurourghly

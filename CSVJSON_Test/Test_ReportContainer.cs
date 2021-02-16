@@ -21,7 +21,7 @@ namespace CSVJSON_Test
 
 
             //Assert
-            throw new NotImplementedException();
+            Assert.Inconclusive();
         }
 
         [TestMethod]
@@ -34,7 +34,7 @@ namespace CSVJSON_Test
 
 
             //Assert
-            throw new NotImplementedException();
+            Assert.Inconclusive();
         }
 
         [TestMethod]
@@ -47,7 +47,7 @@ namespace CSVJSON_Test
 
 
             //Assert
-            throw new NotImplementedException();
+            Assert.Inconclusive();
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace CSVJSON_Test
 
 
             //Assert
-            throw new NotImplementedException();
+            Assert.Inconclusive();
         }
 
         [TestMethod]
@@ -73,7 +73,7 @@ namespace CSVJSON_Test
 
 
             //Assert
-            throw new NotImplementedException();
+            Assert.Inconclusive();
         }
 
         [TestMethod]
@@ -86,7 +86,7 @@ namespace CSVJSON_Test
 
 
             //Assert
-            throw new NotImplementedException();
+            Assert.Inconclusive();
         }
 
         [TestMethod]
@@ -99,7 +99,7 @@ namespace CSVJSON_Test
 
 
             //Assert
-            throw new NotImplementedException();
+            Assert.Inconclusive();
         }
     }
 }

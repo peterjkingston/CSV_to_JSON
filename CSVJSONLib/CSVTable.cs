@@ -6,7 +6,10 @@ namespace CSVJSONLib
 {
     public class CSVTable : ICSVTable
     {
-        public IEnumerable<CSVAddress> Addresses { get; private set; }
+        public IEnumerable<CSVAddress> Addresses 
+        {
+            get { return _addresses; }
+        }
 
         private List<CSVAddress> _addresses;
 
@@ -49,7 +52,7 @@ namespace CSVJSONLib
         {
             int longestDepth = 0;
 
-            foreach (CSVAddress address in Addresses)
+            foreach (CSVAddress address in _addresses)
             {
                 int length = 0;
                 CSVAddress nextAddress = new CSVAddress(address.Row, address.Column + 1);

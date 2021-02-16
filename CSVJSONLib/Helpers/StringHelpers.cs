@@ -8,7 +8,7 @@ namespace CSVJSONLib
 {
 	public static class StringHelpers
 	{
-		public static string[] DoubleQuoteSplit(this string text, string delimiter)
+		public static string[] DoubleQuoteSplit(this string text, char delimiter)
 		{
 			string[] easyQuotes = text.Split('\"');
 			string tempText = text;
@@ -22,7 +22,7 @@ namespace CSVJSONLib
 				tempText = tempText.Replace('\"'+quotedData+'\"', placeHolder);
 			}
 
-			string[] result = tempText.Split(new string[] { delimiter }, StringSplitOptions.None);
+			string[] result = tempText.Split(delimiter);
 			foreach(string placeHolder in quotedDatas.Keys)
 			{
 				for(int column = 0; column < result.Length; column++)

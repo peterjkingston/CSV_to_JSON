@@ -42,5 +42,18 @@ namespace CSVJSONLib
 
 			return newArray;
         }
+
+		public static T[,] To2DArray<T>(this T[][] jagged, int fixedWidth)
+        {
+			T[,] new2D = new T[jagged.GetLength(0),fixedWidth];
+			for(int row = 0; row < new2D.GetLength(0); row++)
+            {
+				for(int col = 0; col < new2D.GetLength(1); col++)
+                {
+					new2D[row, col] = jagged[row][col];
+                }
+            }
+			return new2D;
+        }
 	}
 }

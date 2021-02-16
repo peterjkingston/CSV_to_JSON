@@ -16,7 +16,7 @@ namespace CSVJSONLib
         {
             CsvReport = ArrayFromCSV(csvText);
             _reportContainer = reportContainer;
-            _inspected = new bool[CsvReport.GetUpperBound(0), CsvReport.GetUpperBound(1)];
+            _inspected = new bool[CsvReport.GetLength(0), CsvReport.GetLength(1)];
             _inspected.Fill(false);
         }
 
@@ -32,7 +32,7 @@ namespace CSVJSONLib
 
                 string[] rows = csvText.Trim().Split('\n');
                 int rowCount = rows.Length;
-                int columnCount = rows[0].DoubleQuoteSplit(", ").Length;
+                int columnCount = rows[0].DoubleQuoteSplit(comma).Length;
                 int c = 0;
                 string[,] result = new string[rowCount, columnCount];
                 for (int row = 0; row < rowCount; row++)
@@ -54,7 +54,7 @@ namespace CSVJSONLib
                         }
                         if (cell.Contains(doubleQuotes)) cell.Replace(doubleQuotes, string.Empty);
 
-                        string[] arry = cell.DoubleQuoteSplit(new string(new char[] { comma }));
+                        string[] arry = cell.DoubleQuoteSplit(comma);
                         for (int columnIndex = 0; columnIndex < columnCount; columnIndex++)
                         {
                             cell = arry[columnIndex];

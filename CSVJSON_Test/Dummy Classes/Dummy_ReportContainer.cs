@@ -9,19 +9,39 @@ namespace CSVJSON_Test.Dummy_Classes
 {
 	public class Dummy_ReportContainer : IReportContainer
 	{
+        private Dictionary<string, string> _props;
+        private Dictionary<string, CSVTable> _tables;
+
+        public Dummy_ReportContainer(string[] props, string[] vals)
+        {
+			_props = new Dictionary<string,string>();
+			_tables = new Dictionary<string, CSVTable>();
+			for(int i=0; i < props.Length; i++)
+            {
+				_props.Add(props[i], vals[i]);
+            }
+        }
+
 		public void AddProperty(string propertyName, string propertyValue)
 		{
-			throw new NotImplementedException();
+            if (!_props.ContainsKey(propertyName))
+            {
+				_props.Add(propertyName, propertyValue);
+			}
+			else
+            {
+				AddProperty(propertyName + _props.Count.ToString(), propertyValue);
+            }
 		}
 
 		public void AddProperty(string propertyValue)
 		{
-			throw new NotImplementedException();
+			_props.Add(_props.Count.ToString(), propertyValue);
 		}
 
 		public void AddTable(CSVTable table)
 		{
-			throw new NotImplementedException();
+			_tables.Add("Table_" + _tables.Count.ToString(), table);
 		}
 	}
 }
