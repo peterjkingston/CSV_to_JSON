@@ -33,19 +33,19 @@ namespace CSVJSON_Test
 
 
         [TestMethod]
-        public void GetProperties_ReturnsNull_GivenInvalidInput()
+        public void GetProperties_CreatesReportContainer_GivenInvalidInput()
         {
             //Arrange
-            string[] props = { "someProp" };
-            string[] vals = { "someVal" };
+            string[] props = { "" };
+            string[] vals = { "" };
             IReportContainer reportContainer = new Dummy_ReportContainer(props, vals);
-            CSVReportReader reportReader = new CSVReportReader(_csvText, reportContainer);
+            CSVReportReader reportReader = new CSVReportReader("", null);
 
             //Act
             IReportContainer actual = reportReader.GetProperties();
 
             //Assert
-            Assert.IsNull(actual);
+            Assert.IsNotNull(actual);
         }
     }
 }

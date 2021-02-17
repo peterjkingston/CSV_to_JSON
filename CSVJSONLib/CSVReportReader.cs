@@ -15,7 +15,7 @@ namespace CSVJSONLib
         public CSVReportReader(string csvText, IReportContainer reportContainer)
         {
             CsvReport = ArrayFromCSV(csvText);
-            _reportContainer = reportContainer;
+            _reportContainer = reportContainer == null ? new ReportContainer(new UniqueNameProvider()): reportContainer ;
             _inspected = new bool[CsvReport.GetLength(0), CsvReport.GetLength(1)];
             _inspected.Fill(false);
         }
@@ -75,6 +75,11 @@ namespace CSVJSONLib
 
         public IReportContainer GetProperties()
         {
+            if(_reportContainer == null)
+            {
+                return _reportContainer;
+            }
+
             for (int row = 0; row < CsvReport.GetLength(0); row++)
             {
                 for (int col = 0; col < this.CsvReport.GetLength(1); col++)
