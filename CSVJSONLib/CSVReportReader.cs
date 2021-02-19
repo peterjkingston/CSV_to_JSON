@@ -87,7 +87,7 @@ namespace CSVJSONLib
                     if (!IsInspected(row, col))
                     {
                         string cell = this.CsvReport[row, col];
-                        CSVAddress address = new CSVAddress(row, col);
+                        ICSVAddress address = new CSVAddress(row, col, CsvReport);
 
                         //If the cell contains both the property name and the value
                         if (cell.Split(':').Length == 2)
@@ -106,20 +106,23 @@ namespace CSVJSONLib
                         }
 
                         //If the cell is part of a table
-                        if (address.IsTableHeader(CsvReport))
+                        if (address.IsTableHeader())
                         {
                             CSVTable table = CSVTable.FindTable(row, col, CsvReport);
-
-                            foreach (CSVAddress tableAddress in table.Addresses)
+                            
+                            if(table != null)
                             {
-                                _reportContainer.AddTable(table);
-                                MarkInspected(tableAddress);
+                                foreach (CSVAddress tableAddress in table.Addresses)
+                                {
+                                    _reportContainer.AddTable(table);
+                                    MarkInspected(tableAddress);
+                                }
+                                continue;
                             }
-                            continue;
                         }
 
                         //If the cell has a numeric value to the right
-                        if (address.IsLeftLabel(CsvReport))
+                        if (address.IsLeftLabel())
                         {
                             _reportContainer.AddProperty(cell, CsvReport[row, col + 1]);
                             _inspected[row, col] = true;
@@ -127,7 +130,7 @@ namespace CSVJSONLib
                         }
 
                         //If the cell has a numeric value beneath
-                        if (address.IsTopLabel(CsvReport))
+                        if (address.IsTopLabel())
                         {
                             _reportContainer.AddProperty(cell, CsvReport[row + 1, col]);
                             _inspected[row, col] = true;
@@ -143,7 +146,7 @@ namespace CSVJSONLib
                         }
 
                         //If the cell value is stand-alone
-                        if (address.IsStandAlone(CsvReport))
+                        if (address.IsStandAlone())
                         {
                             _reportContainer.AddProperty(cell);
                             _inspected[row, col] = true;
@@ -155,7 +158,7 @@ namespace CSVJSONLib
             return _reportContainer;
         }
 
-        private void MarkInspected(CSVAddress address)
+        private void MarkInspected(ICSVAddress address)
         {
             _inspected[address.Row, address.Column] = true;
         }

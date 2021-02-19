@@ -9,9 +9,13 @@ namespace CSVJSON_Test.Dummy_Classes
 {
 	public class Dummy_CSVTable : ICSVTable
 	{
-		public IEnumerable<CSVAddress> Addresses { get; private set; }
+		public IEnumerable<ICSVAddress> Addresses { get; private set; }
 
-		public static CSVTable FindTable()
+        public IEnumerable<string> Headers => throw new NotImplementedException();
+
+        public IEnumerable<IEnumerable<string>> Records => throw new NotImplementedException();
+
+        public static CSVTable FindTable()
 		{
 			return new CSVTable();
 		}

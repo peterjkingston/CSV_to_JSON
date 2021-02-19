@@ -5,21 +5,34 @@ namespace CSVJSONLib
 {
     public struct CSVAddress : ICSVAddress
     {
-        public CSVAddress(int row, int col) : this()
+        string[,] _csvReport;
+
+        public CSVAddress(int row, int col, string[,] csvReport) : this()
         {
             Row = row;
             Column = col;
+            _csvReport = csvReport;
         }
 
         public int Column { get; internal set; }
         public int Row { get; internal set; }
 
-        public bool IsStandAlone(string[,] csvReport)
+        public string Value 
         {
-            bool isntLeftLabel = !IsLeftLabel(csvReport);
-            bool isntTableHeader = !IsTableHeader(csvReport);
-            bool isntTopLabel = !IsTopLabel(csvReport);
-            bool doesntContainLabel = !ContainsLabel(csvReport);
+            get { return this.IsValid()?_csvReport[Row, Column]:string.Empty; }
+        }
+
+        public string[,] Plane
+        {
+            get { return _csvReport; }
+        }
+
+        public bool IsStandAlone()
+        {
+            bool isntLeftLabel = !IsLeftLabel();
+            bool isntTableHeader = !IsTableHeader();
+            bool isntTopLabel = !IsTopLabel();
+            bool doesntContainLabel = !ContainsLabel();
 
             return isntLeftLabel &&
                    isntTableHeader &&
@@ -27,80 +40,80 @@ namespace CSVJSONLib
                    doesntContainLabel;
         }
 
-        public bool ContainsLabel(string[,] csvReport)
+        public bool ContainsLabel()
         {
-            return csvReport[this.Row, this.Column].Contains(":");
+            return _csvReport[this.Row, this.Column].Contains(":");
         }
 
-        public bool IsTopLabel(string[,] csvReport)
+        public bool IsTopLabel()
         {
-            bool isntBottomRow = csvReport.GetUpperBound(0) > this.Row;
+            bool isntBottomRow = _csvReport.GetUpperBound(0) > this.Row;
             bool hasValueBelow = false;
             if (isntBottomRow) 
             { 
-                hasValueBelow = csvReport[this.Row + 1, this.Column] != string.Empty; 
+                hasValueBelow = _csvReport[this.Row + 1, this.Column] != string.Empty; 
             }
 
             return hasValueBelow;
         }
 
-        public bool IsValid(string[,] csvReport)
+        public bool IsValid()
         {
-            bool withinHeight = this.Row < csvReport.GetLength(0) &&
+            bool withinHeight = this.Row < _csvReport.GetLength(0) &&
                                         this.Row >= 0;
-            bool withinWidth = this.Column < csvReport.GetLength(1) &&
+            bool withinWidth = this.Column < _csvReport.GetLength(1) &&
                                        this.Column >= 0;
             return withinHeight && withinWidth;  
         }
 
-        public bool IsLeftLabel(string[,] csvReport)
+        public bool IsLeftLabel()
         {
             
-            bool isLeftofRightBoundary = csvReport.GetLength(1) > this.Column + 1;
+            bool isLeftofRightBoundary = _csvReport.GetLength(1) > this.Column + 1;
             bool hasValueToRight = false;
-            if (csvReport.GetLength(1) != this.Column+1)
+            if (_csvReport.GetLength(1) != this.Column+1)
             {
-                hasValueToRight = csvReport[this.Row, this.Column + 1] != string.Empty;
+                hasValueToRight = _csvReport[this.Row, this.Column + 1] != string.Empty;
             }
 
             return isLeftofRightBoundary &&
                     hasValueToRight; 
         }
 
-        public bool IsTableHeader(string[,] csvReport)
+        public bool IsTableHeader()
         {
             
             bool tableHasAtLeastOneDataRow = false;
-            bool reportHasAtLeastThreeMoreColumns = csvReport.GetLength(1) > this.Column + 2;
-            int tableWidth = GetTableWidth(csvReport);
+            bool reportHasAtLeastThreeMoreColumns = _csvReport.GetLength(1) > this.Column + 2;
+            int tableWidth = GetTableWidth();
             bool tableHasAtLeastThreeColumns = tableWidth >=3;
 
             if (tableHasAtLeastThreeColumns)
             {         
-                int tableHeight = GetTableHeight(csvReport);
-                tableHasAtLeastOneDataRow = GetDataRows(csvReport,tableWidth,tableHeight) != null;
+                int tableHeight = GetTableHeight();
+                tableHasAtLeastOneDataRow = GetDataRows(tableWidth,tableHeight) != null;
             }
             
             return tableHasAtLeastThreeColumns &&
                    tableHasAtLeastOneDataRow;
         }
 
-        private int GetTableHeight(string[,] csvReport)
+        private int GetTableHeight()
         {
             int maxHeight = 0;
-            int tableWidth = GetTableWidth(csvReport);
-            int tableLeftCol = GetTableLeftBound(csvReport);
+            int tableWidth = GetTableWidth();
+            int tableLeftCol = GetTableLeftBound();
             int tableRightCol = tableLeftCol + tableWidth;
             
             for(int tableCol = tableLeftCol; tableCol < tableRightCol; tableCol++)
             {
                 int tableRow = 0;
-                int reportHeight = csvReport.GetLength(0);
-                Func<int, bool> nextDoesNotExceedReport = (nextRow) => { return nextRow < reportHeight; };
-                Func<int, int, bool> nextIsNotEmpty = (nextRow, column) => { return csvReport[nextRow, column] != string.Empty; };
+                int reportHeight = _csvReport.GetLength(0);
+                Func<CSVAddress, bool> nextDoesNotExceedReport = (address) => { return address.IsValid(); };
+                Func<CSVAddress, bool> nextIsNotEmpty = (address) => { return !address.IsBlank(); };
 
-                while (nextDoesNotExceedReport(this.Row + tableRow + 1) && 
-                       nextIsNotEmpty(this.Row + tableRow + 1, tableCol))
+                while (nextDoesNotExceedReport(new CSVAddress(this.Row + tableRow + 1, this.Column, _csvReport)) && 
+                       nextIsNotEmpty(new CSVAddress(this.Row + tableRow + 1, this.Column, _csvReport)))
                 {
                     tableRow++;
                 }
@@ -109,20 +122,20 @@ namespace CSVJSONLib
             return maxHeight;
         }
 
-        private int GetTableLeftBound(string[,] csvReport)
+        private int GetTableLeftBound()
         {
             int currentCol = this.Column;
-            while (currentCol > -1 && csvReport[this.Row,currentCol].Trim() != string.Empty)
+            while (currentCol > -1 && _csvReport[this.Row,currentCol].Trim() != string.Empty)
             {
                 currentCol--;
             }
             return currentCol + 1;
         }
 
-        private string[,] GetDataRows(string[,] csvReport, int tableWidth, int tableHeight)
+        private string[,] GetDataRows(int tableWidth, int tableHeight)
         {
             List<string[]> records = new List<string[]>();
-            int tableLeftCol = GetTableLeftBound(csvReport);
+            int tableLeftCol = GetTableLeftBound();
             int tableRightCol = tableLeftCol + tableWidth;
 
             for (int tableRow = 0; tableRow < tableHeight; tableRow++)
@@ -131,7 +144,7 @@ namespace CSVJSONLib
                 int index = 0;
                 for (int tableCol = tableLeftCol; tableCol < tableRightCol; tableCol++)
                 {
-                    record[index++] = csvReport[this.Row + tableRow, tableCol];
+                    record[index++] = _csvReport[this.Row + tableRow, tableCol];
                 }
                 bool isEmpty = true;
                 foreach (string val in record)
@@ -147,21 +160,39 @@ namespace CSVJSONLib
             return records.ToArray().To2DArray(tableWidth);
         }
 
-        private int GetTableWidth(string[,] csvReport)
+        private int GetTableWidth()
         {
             int leftLimit = this.Column;
-            while (leftLimit != 0 && csvReport[this.Row, leftLimit - 1] != string.Empty)
+            while (leftLimit != 0 && _csvReport[this.Row, leftLimit - 1] != string.Empty)
             {
                 leftLimit--;
             }
 
-            int rightBoundry = csvReport.GetUpperBound(1);
+            int rightBoundry = _csvReport.GetUpperBound(1);
             int rightLimit = this.Column;
-            while (rightLimit != rightBoundry && csvReport[this.Row, rightLimit + 1] != string.Empty)
+            while (rightLimit != rightBoundry && _csvReport[this.Row, rightLimit + 1] != string.Empty)
             {
                 rightLimit++;
             }
             return rightLimit - leftLimit + 1;
+        }
+
+        public bool IsBlank()
+        {
+            return _csvReport[Row, Column].Trim() == string.Empty;
+        }
+
+        public bool IsZero()
+        {
+            int val;
+            if(int.TryParse(Value, out val))
+            {
+                return val == 0;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

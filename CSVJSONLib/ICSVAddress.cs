@@ -5,10 +5,15 @@
         int Column { get; }
         int Row { get; }
 
-        bool IsLeftLabel(string[,] csvReport);
-        bool IsStandAlone(string[,] csvReport);
-        bool IsTableHeader(string[,] csvReport);
-        bool IsTopLabel(string[,] csvReport);
-        bool IsValid(string[,] csvReport);
+        string Value { get; }
+        string[,] Plane { get; }
+
+        bool IsLeftLabel();
+        bool IsStandAlone();
+        bool IsTableHeader();
+        bool IsTopLabel();
+        bool IsValid();
+        bool IsBlank();
+        bool IsZero();
     }
 }

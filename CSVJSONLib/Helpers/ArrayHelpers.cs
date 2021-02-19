@@ -55,5 +55,17 @@ namespace CSVJSONLib
             }
 			return new2D;
         }
+
+		public static bool OnlyContains<T>(this T[] array, T[] allowed)
+        {
+			foreach(T arrayMember in array)
+            {
+                if (!allowed.Contains(arrayMember))
+                {
+					return false;
+                }
+            }
+			return true;
+        }
 	}
 }

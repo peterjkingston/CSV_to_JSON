@@ -15,12 +15,19 @@ namespace CSVJSON_Test.Dummy_Classes
 		private bool _valid;
 
 		public int Column { get; private set; }
-
-		private bool _labelLeft;
-
 		public int Row { get; private set; }
 
-		public Dummy_CSVAddress(int row, int col, bool labelLeft = false, bool labelTop = false, bool tableHeader = false, bool standAlone = false, bool valid = false)
+		private bool _labelLeft;
+        private bool _isBlank;
+        private string _value;
+
+		string[,] _plane;
+
+        public string Value { get { return _value; } }
+
+        public string[,] Plane { get { return _plane; } }
+
+        public Dummy_CSVAddress(int row, int col, string[,] plane, string value = "", bool labelLeft = false, bool labelTop = false, bool tableHeader = false, bool standAlone = false, bool valid = false, bool blank = false)
 		{
 			Row = row;
 			Column = col;
@@ -29,31 +36,44 @@ namespace CSVJSON_Test.Dummy_Classes
 			_tableHeader = tableHeader;
 			_standAlone = standAlone;
 			_valid = valid;
+			_isBlank = blank;
+			_value = value;
+			_plane = plane;
 		}
 
-		public bool IsLeftLabel(string[,] csvReport)
+		public bool IsLeftLabel()
 		{
 			return _labelLeft;
 		}
 
-		public bool IsStandAlone(string[,] csvReport)
+		public bool IsStandAlone()
 		{
 			return _standAlone;
 		}
 
-		public bool IsTableHeader(string[,] csvReport)
+		public bool IsTableHeader()
 		{
 			return _tableHeader;
 		}
 
-		public bool IsTopLabel(string[,] csvReport)
+		public bool IsTopLabel()
 		{
 			return _labelTop;
 		}
 
-		public bool IsValid(string[,] csvReport)
+		public bool IsValid()
 		{
 			return _valid;
 		}
-	}
+
+        public bool IsBlank()
+        {
+            return _isBlank;
+        }
+
+        public bool IsZero()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -4,6 +4,8 @@ namespace CSVJSONLib
 {
     public interface ICSVTable
     {
-        IEnumerable<CSVAddress> Addresses { get; }
+        IEnumerable<ICSVAddress> Addresses { get; }
+        IEnumerable<string> Headers { get; }
+        IEnumerable<IEnumerable<string>> Records { get; }
     }
 }
