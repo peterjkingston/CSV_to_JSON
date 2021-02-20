@@ -11,40 +11,49 @@ namespace CSVJSONLib
         private IUniqueNameProvider _nameProvider;
 
         public Dictionary<string, string> Properties { get; private set; }
-        public Dictionary<string, CSVTable> Tables { get; private set; }
+        public Dictionary<string, ICSVTable> Tables { get; private set; }
 
         public ReportContainer(IUniqueNameProvider nameProvider)
         {
             _nameProvider = nameProvider;
+            Properties = new Dictionary<string, string>();
+            Tables = new Dictionary<string, ICSVTable>();
         }
 
         public void AddProperty(string propertyName, string propertyValue)
         {
             string[] existingNames = GetExistingNames();
-            Properties.Add(_nameProvider.GetUniqueName(existingNames, propertyName), propertyValue);
+            if (propertyName.Trim() != string.Empty && propertyValue.Trim() != string.Empty)
+                Properties.Add(_nameProvider.GetUniqueName(existingNames, propertyName), propertyValue);
         }
 
         private string[] GetExistingNames()
         {
-            return Properties.Keys.ToArray().Append(Tables.Keys.ToArray());
+            string[] propNames = Properties.Count > 0? Properties.Keys.ToArray() : new string[0];
+            string[] tableNames = Tables.Count > 0 ? Tables.Keys.ToArray() : new string[0];
+            propNames.Append(tableNames);
+            return propNames;
         }
 
         public void AddProperty(string propertyValue)
         {
             string[] existingNames = GetExistingNames();
+            if(propertyValue.Trim() != string.Empty) 
             Properties.Add(_nameProvider.GetUniqueName(existingNames), propertyValue);
         }
 
-        public void AddTable(string tableName, CSVTable table)
+        public void AddTable(string tableName, ICSVTable table)
         {
             string[] existingNames = GetExistingNames();
-            Tables.Add(_nameProvider.GetUniqueName(existingNames, tableName), table);
+            if (table != null)
+                Tables.Add(_nameProvider.GetUniqueName(existingNames, tableName), table);
         }
 
-        public void AddTable(CSVTable table)
+        public void AddTable(ICSVTable table)
         {
             string[] existingNames = GetExistingNames();
-            Tables.Add(_nameProvider.GetUniqueName(existingNames), table);
+            if (table != null)
+                Tables.Add(_nameProvider.GetUniqueName(existingNames), table);
         }
     }
 }

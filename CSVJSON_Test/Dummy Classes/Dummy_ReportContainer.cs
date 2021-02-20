@@ -10,19 +10,23 @@ namespace CSVJSON_Test.Dummy_Classes
 	public class Dummy_ReportContainer : IReportContainer
 	{
         private Dictionary<string, string> _props;
-        private Dictionary<string, CSVTable> _tables;
+        private Dictionary<string, ICSVTable> _tables;
 
         public Dummy_ReportContainer(string[] props, string[] vals)
         {
 			_props = new Dictionary<string,string>();
-			_tables = new Dictionary<string, CSVTable>();
+			_tables = new Dictionary<string, ICSVTable>();
 			for(int i=0; i < props.Length; i++)
             {
 				_props.Add(props[i], vals[i]);
             }
         }
 
-		public void AddProperty(string propertyName, string propertyValue)
+        public Dictionary<string, ICSVTable> Tables => throw new NotImplementedException();
+
+        public Dictionary<string, string> Properties => throw new NotImplementedException();
+
+        public void AddProperty(string propertyName, string propertyValue)
 		{
             if (!_props.ContainsKey(propertyName))
             {
@@ -39,9 +43,9 @@ namespace CSVJSON_Test.Dummy_Classes
 			_props.Add(_props.Count.ToString(), propertyValue);
 		}
 
-		public void AddTable(CSVTable table)
+		public void AddTable(ICSVTable table)
 		{
 			_tables.Add("Table_" + _tables.Count.ToString(), table);
 		}
-	}
+    }
 }
