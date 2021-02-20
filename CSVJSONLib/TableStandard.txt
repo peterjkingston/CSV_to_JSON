@@ -1,0 +1,5 @@
+﻿A Table is defined as the following:
+* No value contianed in any cell within a 1 cell border of the table.
+* The table must contain at least 3 non-numeric sewuential column headers
+* The table must contain at least 1 row, with 1 field that contains data
+* Rows that only contain blank values or 0's are not counted.

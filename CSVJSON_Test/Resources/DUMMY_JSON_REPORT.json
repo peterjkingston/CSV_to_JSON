@@ -1,0 +1,17 @@
+﻿{ 
+	"Item1":"01/01/2021",
+	"SodaFlavor": "Grape",
+	"Code": "Fun",
+	"Item2": "MambaJamba",
+	"FavoriteFlavor": "DoubleGrape",
+	"Table1":[
+		{
+			"Prod":"Care",
+			"Num":"0",
+			"Dt":"Tomorrow",
+			"Val":"3"
+		}
+	],
+	"SingleValue":"24",
+	"SingleValue-1":"18"
+}

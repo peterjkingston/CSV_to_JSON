@@ -80,5 +80,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSVJSONLib\CSVJSONLib.csproj">
+      <Project>{e23ffeb3-b8af-4d09-adce-90d52b886f0d}</Project>
+      <Name>CSVJSONLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

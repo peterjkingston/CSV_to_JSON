@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CSVJSONLib
 {
 	public interface IReportContainer
 	{
-		void AddTable(CSVTable table);
-		void AddProperty(string cell, string v);
-		void AddProperty(string cell);
+		Dictionary<string, ICSVTable> Tables { get; }
+		Dictionary<string, string> Properties { get; }
+
+        void AddTable(ICSVTable table);
+		void AddProperty(string propertyName, string propertyValue);
+		void AddProperty(string propertyValue);
 	}
 }
