@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace CSVJSONLib
 {
-    public class ReportContainer : IReportContainer
+    public class ReportContainer : IReportContainer, IJSONConvertable
     {
         private IUniqueNameProvider _nameProvider;
 
@@ -54,6 +57,25 @@ namespace CSVJSONLib
             string[] existingNames = GetExistingNames();
             if (table != null)
                 Tables.Add(_nameProvider.GetUniqueName(existingNames), table);
+        }
+
+        public string ToJSON()
+        {
+            JObject jo = new JObject();
+            foreach (string key in Properties.Keys)
+            {
+                jo.Add(key,Properties[key]);
+            }
+            foreach (string key in Tables.Keys)
+            {
+                jo.Add(key, Tables[key].AsJObject());
+            }
+            return jo.ToString();
+        }
+
+        public JToken AsJObject()
+        {
+            return JObject.Parse(ToJSON());
         }
     }
 }

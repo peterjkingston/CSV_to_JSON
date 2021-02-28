@@ -1,5 +1,6 @@
 ﻿using CSVJSONLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,6 +69,30 @@ namespace CSVJSON_Test
 
             //Act
             bool actual = table.Records.Count() == 1;
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ToJSON_RetrunsJSONArray()
+        {
+            //Arrange
+            string[,] sampleReport =
+            {
+                { "",""        ,""       ,""          , "" },
+                { "", "Header1","Header2", "Header3"  , "" },
+                { "", ""       ,"Jank"   , "0"        , "" },
+                { "", ""       ,"0"      , "0"        , "" },
+                { "",""        ,""       ,""          , "" }
+            };
+            IJSONConvertable table = CSVTable.FindTable(1, 1, sampleReport);
+            string jsonSample = "[{\"Header1\":\"\",  \"Header2\":\"Jank\", \"Header3\":\"0\"}]";
+            JToken jsonSampleArray = JArray.Parse(jsonSample);
+            bool expected = true;
+
+            //Act
+            bool actual = jsonSampleArray.ToString() == table.AsJObject().ToString();
 
             //Assert
             Assert.AreEqual(expected, actual);

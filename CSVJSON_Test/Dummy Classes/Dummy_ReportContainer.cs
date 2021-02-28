@@ -47,5 +47,15 @@ namespace CSVJSON_Test.Dummy_Classes
 		{
 			_tables.Add("Table_" + _tables.Count.ToString(), table);
 		}
+
+        public void AddTable(string v, ICSVTable table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ToJSON()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
