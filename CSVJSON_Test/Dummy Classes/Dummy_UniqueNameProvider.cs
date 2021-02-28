@@ -11,7 +11,15 @@ namespace CSVJSON_Test.Dummy_Classes
 	{
 		public string GetUniqueName(string[] names, string preferredName)
 		{
-			return Guid.NewGuid().ToString();
+            if (names.Contains(preferredName))
+            {
+				return Guid.NewGuid().ToString();
+			}
+            else
+            {
+				return preferredName;
+            }
+			
 		}
 
 		public string GetUniqueName(string[] names)

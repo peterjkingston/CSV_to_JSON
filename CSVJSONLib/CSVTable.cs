@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CSVJSONLib
 {
-    public class CSVTable : ICSVTable
+    public class CSVTable : ICSVTable, IJSONConvertable
     {
         public IEnumerable<ICSVAddress> Addresses 
         {
@@ -225,6 +226,23 @@ namespace CSVJSONLib
         private void AddAddress(ICSVAddress address)
         {
             _addresses.Add(address);
+        }
+
+        public JToken AsJObject()
+        {
+            JArray joTable = new JArray();
+
+            foreach (IEnumerable<string> record in Records)
+            {
+                JObject joRecord = new JObject();
+                for(int h = 0; h < Headers.Count(); h++)
+                {
+                    joRecord.Add(Headers.ElementAt(h), record.ElementAt(h));
+                }
+                joTable.Add(joRecord);
+            }
+
+            return joTable;
         }
     }
 }
