@@ -8,7 +8,7 @@ using CSVJSONLib;
 using CSVJSON_Test.Dummy_Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CSVJSON_Test
+namespace CSVJSONLib_Tests
 {
     [TestClass]
     public class Test_CSVReportReader

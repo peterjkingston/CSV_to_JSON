@@ -1,6 +1,6 @@
 ﻿namespace CSV_to_JSON
 {
-	internal class SwitchArgs : ISwitchArgs 
+	public class SwitchArgs : ISwitchArgs 
 	{
 		private string[] args;
 		public string TargetFilePath { get; }

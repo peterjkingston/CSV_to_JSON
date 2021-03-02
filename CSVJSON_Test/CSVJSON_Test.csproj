@@ -52,28 +52,39 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CSV_to_JSON_Tests\Test_Containerized_Thoughput.cs" />
+    <Compile Include="CSV_to_JSON_Tests\Test_OutputHandler.cs" />
+    <Compile Include="CSV_to_JSON_Tests\Test_SwitchArgs.cs" />
+    <Compile Include="Dummy Classes\Dummy_SwitchArgs.cs" />
+    <Compile Include="CSV_to_JSON_Tests\Test_Application.cs" />
     <Compile Include="Dummy Classes\Dummy_CSVAddress.cs" />
     <Compile Include="Dummy Classes\Dummy_CSVTable.cs" />
     <Compile Include="Dummy Classes\Dummy_CSVReportReader.cs" />
+    <Compile Include="Dummy Classes\Dummy_OutputHandler.cs" />
     <Compile Include="Dummy Classes\Dummy_ReportContainer.cs" />
     <Compile Include="Dummy Classes\Dummy_UniqueNameProvider.cs" />
     <Compile Include="Resources\TEST_CONSTANTS.cs" />
-    <Compile Include="Test_CSVAddress.cs" />
-    <Compile Include="Test_CSVReportReader.cs" />
+    <Compile Include="CSVJSONLib_Tests\Test_CSVAddress.cs" />
+    <Compile Include="CSVJSONLib_Tests\Test_CSVReportReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test_CSVTable.cs" />
-    <Compile Include="Test_ReportContainer.cs" />
-    <Compile Include="Test_UniqueNameProvider.cs" />
+    <Compile Include="CSVJSONLib_Tests\Test_CSVTable.cs" />
+    <Compile Include="CSVJSONLib_Tests\Test_ReportContainer.cs" />
+    <Compile Include="CSVJSONLib_Tests\Test_UniqueNameProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Resources\DUMMY_JSON_REPORT.json" />
+    <None Include="Resources\Expected Json.json" />
     <None Include="Resources\Sample Report.csv" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSVJSONLib\CSVJSONLib.csproj">
       <Project>{e23ffeb3-b8af-4d09-adce-90d52b886f0d}</Project>
       <Name>CSVJSONLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSV_to_JSON\CSV_to_JSON.csproj">
+      <Project>{f3d7e864-58af-44b3-8bbc-66c635261b5e}</Project>
+      <Name>CSV_to_JSON</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

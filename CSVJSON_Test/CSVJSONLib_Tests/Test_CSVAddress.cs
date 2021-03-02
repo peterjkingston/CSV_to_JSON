@@ -3,7 +3,7 @@ using System;
 using CSVJSONLib;
 using CSVJSON_Test.Resources;
 
-namespace CSVJSON_Test
+namespace CSVJSONLib_Tests
 {
     [TestClass]
     public class Test_CSVAddress

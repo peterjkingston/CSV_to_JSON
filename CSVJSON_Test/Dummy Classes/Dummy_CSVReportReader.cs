@@ -18,7 +18,11 @@ namespace CSVJSON_Test.Dummy_Classes
 			_properties = properties;
 		}
 
-		public IReportContainer GetProperties()
+        public Dummy_CSVReportReader()
+        {
+        }
+
+        public IReportContainer GetProperties()
 		{
 			return _properties;
 		}

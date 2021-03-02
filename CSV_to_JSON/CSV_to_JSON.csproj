@@ -71,7 +71,9 @@
     <Compile Include="Init Classes\Application.cs" />
     <Compile Include="Init Classes\Containerization.cs" />
     <Compile Include="Init Classes\IApplication.cs" />
+    <Compile Include="Init Classes\IOutputHandler.cs" />
     <Compile Include="Init Classes\ISwitchArgs.cs" />
+    <Compile Include="Init Classes\OutputHandler.cs" />
     <Compile Include="Init Classes\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Init Classes\SwitchArgs.cs" />
