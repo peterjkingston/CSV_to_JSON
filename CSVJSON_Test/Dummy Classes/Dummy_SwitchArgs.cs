@@ -6,6 +6,12 @@ namespace CSV_to_JSON_Tests
     {
         public Dummy_SwitchArgs(string targetPath) 
         {
+            TargetFilePath = targetPath;
         }
+
+        public string TargetFilePath { get; private set; }
+
+        public string OutputFile { get { return "SomeOutputFile.json"; } }
+            
     }
 }

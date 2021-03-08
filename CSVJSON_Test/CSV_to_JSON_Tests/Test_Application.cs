@@ -20,8 +20,10 @@ namespace CSV_to_JSON_Tests
         {
             //Arrange
             string targetPath = CSV_SAMPLE_PATH;
+            Dummy_ReportContainer container = new Dummy_ReportContainer(new string[] { "someProp" }, new string[] { "someVal" });
             Dummy_OutputHandler outputHandler = new Dummy_OutputHandler();
-            Dummy_CSVReportReader reportReader = new Dummy_CSVReportReader();
+            Dummy_CSVReportReader reportReader = new Dummy_CSVReportReader(container);
+                
             IApplication application = new Application(outputHandler, new Dummy_SwitchArgs(targetPath), reportReader);
             bool expected = true;
 

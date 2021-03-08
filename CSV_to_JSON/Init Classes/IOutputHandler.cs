@@ -4,5 +4,6 @@
     {
         void ToOutputStream(string outputObj);
         void OutputError(string errorMessage);
+        void PrintToFile(string outputObj, string toFilePath);
     }
 }

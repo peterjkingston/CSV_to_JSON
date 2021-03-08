@@ -8,14 +8,18 @@ namespace CSVJSONLib
 {
     public class CSVReportReader : ICSVReportReader
     {
-        public string[,] CsvReport { get; }
+        public string[,] CsvReport { get; private set; }
         bool[,] _inspected;
         private IReportContainer _reportContainer;
 
-        public CSVReportReader(string csvText, IReportContainer reportContainer)
+        public CSVReportReader(IReportContainer reportContainer)
+        {
+            _reportContainer = reportContainer == null ? new ReportContainer(new UniqueNameProvider()): reportContainer ;
+        }
+
+        public void Read(string csvText)
         {
             CsvReport = ArrayFromCSV(csvText);
-            _reportContainer = reportContainer == null ? new ReportContainer(new UniqueNameProvider()): reportContainer ;
             _inspected = new bool[CsvReport.GetLength(0), CsvReport.GetLength(1)];
             _inspected.Fill(false);
         }
@@ -86,11 +90,12 @@ namespace CSVJSONLib
                 {
                     if (!IsInspected(row, col))
                     {
-                        string cell = this.CsvReport[row, col];
+                        string cell = this.CsvReport[row, col].Trim(new char[] { '\r', '\n' });
                         ICSVAddress address = new CSVAddress(row, col, CsvReport);
 
+
                         //If the cell contains both the property name and the value
-                        if (cell.Split(':').Length == 2)
+                        if (cell.Split(':').Length == 2 && cell.Split(':')[1].Trim() != string.Empty)
                         {
                             string[] parts = cell.Split(':');
                             _reportContainer.AddProperty(parts[0].Trim(), parts[1].Trim());
@@ -99,7 +104,7 @@ namespace CSVJSONLib
                         }
 
                         //If the cell is empty
-                        if (cell == string.Empty)
+                        if (cell == string.Empty || cell == "0")
                         {
                             _inspected[row, col] = true;
                             continue;
@@ -115,7 +120,10 @@ namespace CSVJSONLib
                                 foreach (CSVAddress tableAddress in table.Addresses)
                                 {
                                     _reportContainer.AddTable(table);
-                                    MarkInspected(tableAddress);
+                                    foreach (ICSVAddress addr in table.Addresses)
+                                    {
+                                        MarkInspected(addr);
+                                    }
                                 }
                                 continue;
                             }
@@ -127,6 +135,7 @@ namespace CSVJSONLib
                             _reportContainer.AddProperty(cell, CsvReport[row, col + 1]);
                             _inspected[row, col] = true;
                             _inspected[row, col + 1] = true;
+                            continue;
                         }
 
                         //If the cell has a numeric value beneath
@@ -135,6 +144,7 @@ namespace CSVJSONLib
                             _reportContainer.AddProperty(cell, CsvReport[row + 1, col]);
                             _inspected[row, col] = true;
                             _inspected[row + 1, col] = true;
+                            continue;
                         }
 
                         //If the cell property name and value is separated by a whitepace
@@ -142,7 +152,8 @@ namespace CSVJSONLib
                         {
                             string[] parts = cell.Split(' ');
                             _reportContainer.AddProperty(parts[0], parts[1]);
-                            _inspected[row, col] = true; ;
+                            _inspected[row, col] = true;
+                            continue;
                         }
 
                         //If the cell value is stand-alone
@@ -150,6 +161,7 @@ namespace CSVJSONLib
                         {
                             _reportContainer.AddProperty(cell);
                             _inspected[row, col] = true;
+                            continue;
                         }
                     }
                 }

@@ -55,7 +55,7 @@ namespace CSVJSON_Test.Dummy_Classes
 
         public string ToJSON()
         {
-            throw new NotImplementedException();
+            return "{\"className\":\"Dummy_ReportContainer\"}";
         }
     }
 }

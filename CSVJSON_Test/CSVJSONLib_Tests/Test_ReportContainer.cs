@@ -63,37 +63,37 @@ namespace CSVJSONLib_Tests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
-        public void AddPropertyStrStr_NoAdd_Str1IsEmpty()
-        {
-            //Arrange
-            IUniqueNameProvider nameProvider = new Dummy_UniqueNameProvider();
-            IReportContainer reportContainer = new ReportContainer(nameProvider);
-            bool expected = true;
+        //[TestMethod]
+        //public void AddPropertyStrStr_NoAdd_Str1IsEmpty()
+        //{
+        //    //Arrange
+        //    IUniqueNameProvider nameProvider = new Dummy_UniqueNameProvider();
+        //    IReportContainer reportContainer = new ReportContainer(nameProvider);
+        //    bool expected = true;
 
-            //Act
-            reportContainer.AddProperty("", "val");
-            bool actual = reportContainer.Properties.Count == 0;
+        //    //Act
+        //    reportContainer.AddProperty("", "val");
+        //    bool actual = reportContainer.Properties.Count == 0;
 
-            //Assert
-            Assert.AreEqual(expected, actual);
-        }
+        //    //Assert
+        //    Assert.AreEqual(expected, actual);
+        //}
 
-        [TestMethod]
-        public void AddPropertyStrStr_NoAdd_Str2IsEmpty()
-        {
-            //Arrange
-            IUniqueNameProvider nameProvider = new Dummy_UniqueNameProvider();
-            IReportContainer reportContainer = new ReportContainer(nameProvider);
-            bool expected = true;
+        //[TestMethod]
+        //public void AddPropertyStrStr_NoAdd_Str2IsEmpty()
+        //{
+        //    //Arrange
+        //    IUniqueNameProvider nameProvider = new Dummy_UniqueNameProvider();
+        //    IReportContainer reportContainer = new ReportContainer(nameProvider);
+        //    bool expected = true;
 
-            //Act
-            reportContainer.AddProperty("Prop", "");
-            bool actual = reportContainer.Properties.Count == 0;
+        //    //Act
+        //    reportContainer.AddProperty("Prop", "");
+        //    bool actual = reportContainer.Properties.Count == 0;
 
-            //Assert
-            Assert.AreEqual(expected, actual);
-        }
+        //    //Assert
+        //    Assert.AreEqual(expected, actual);
+        //}
 
         [TestMethod]
         public void AddPropertyStr_AddsToContainer()

@@ -49,6 +49,12 @@ namespace CSVJSONLib
             int rowWidth = table.Addresses.Count(); //The current count of the addresses is only the header width: g2g
             int endRows = topLeftAddess.Row + table.GetRowCount(topLeftAddess, csvReport, (a)=> { return a.IsValid() && !a.IsBlank() && !a.IsZero(); });
 
+            //Add the headers to the table addresses
+            for(int header = topLeftAddess.Column; header < endColumns; header++)
+            {
+                table.AddAddress(new CSVAddress(topLeftAddess.Row, header, csvReport));
+            }
+
             int currentCol = topLeftAddess.Column;
             int currentRow = topLeftAddess.Row + 1;
 

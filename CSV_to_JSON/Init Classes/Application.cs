@@ -2,6 +2,7 @@
 using CSVJSONLib;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,20 @@ namespace CSV_to_JSON
 
 		public void Run()
         {
+            try
+            {
+                _reportReader.Read(File.ReadAllText(_switchArgs.TargetFilePath));
+                IReportContainer reportContainer = _reportReader.GetProperties();
 
+                if (_switchArgs.OutputFile != string.Empty)
+                    _outputHandler.PrintToFile(reportContainer.ToJSON(), _switchArgs.OutputFile);
+                
+                _outputHandler.ToOutputStream(reportContainer.ToJSON());
+            }
+            catch (Exception ex)
+            {
+                _outputHandler.OutputError($"{ex.Message}\n\n{ex.StackTrace}");
+            }
         }
 	}
 }

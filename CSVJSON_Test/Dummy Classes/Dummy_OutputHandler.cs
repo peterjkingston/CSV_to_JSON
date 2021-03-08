@@ -27,5 +27,10 @@ namespace CSVJSON_Test.Dummy_Classes
         {
             ErrorOutput = errorMessage;
         }
+
+        public void PrintToFile(string outputObj, string toFilePath)
+        {
+            
+        }
     }
 }

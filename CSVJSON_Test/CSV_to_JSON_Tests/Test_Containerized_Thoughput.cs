@@ -22,7 +22,7 @@ namespace CSV_to_JSON
             bool expected = true;
 
             //Act
-            Program.Main(new string[] { targetFilePath });
+            Program.Main(new string[] { targetFilePath, "-o", newFile });
             bool actual = File.Exists(newFile);
 
             //Assert
@@ -38,7 +38,7 @@ namespace CSV_to_JSON
             bool expected = true;
 
             //Act
-            Program.Main(new string[] { targetFilePath });
+            Program.Main(new string[] { targetFilePath, "-o", newFile });
             string jsonResult = JObject.Parse(File.ReadAllText(newFile)).ToString();
             bool actual = jsonResult != string.Empty;
 
@@ -52,14 +52,12 @@ namespace CSV_to_JSON
             //Arrange
             string targetFilePath = @"..\..\Resources\Sample Report.csv";
             string newFile = Path.Combine(Path.GetDirectoryName(targetFilePath), @"Sample Report.json");
-            string expectedJsonPath = @"..\..\Resources\Expected Json.json";
             bool expected = true;
 
             //Act
-            Program.Main(new string[] { targetFilePath });
-            string jsonResult = JObject.Parse(File.ReadAllText(newFile)).ToString();
-            string expectedJson = JObject.Parse(File.ReadAllText(expectedJsonPath)).ToString();
-            bool actual = jsonResult == expectedJson;
+            Program.Main(new string[] { targetFilePath, "-o", newFile });
+
+            bool actual = false;
 
             //Assert
             Assert.AreEqual(expected, actual);

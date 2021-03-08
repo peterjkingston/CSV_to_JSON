@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CSVJSON_Test.Resources;
 using CSVJSONLib;
 
 namespace CSVJSON_Test.Dummy_Classes
@@ -26,5 +27,10 @@ namespace CSVJSON_Test.Dummy_Classes
 		{
 			return _properties;
 		}
-	}
+
+        public void Read(string csvText)
+        {
+			CsvReport = TEST_CONSTANTS.DUMMY_CSVSTRING_ARRAY;
+        }
+    }
 }

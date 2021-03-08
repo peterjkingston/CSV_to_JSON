@@ -27,17 +27,32 @@ namespace CSVJSONLib
 			}
 		}
 
+		public static int IndexAfter<T>(this T[] array, T value)
+        {
+			int index = 0;
+            foreach (T member in array)
+            {
+                if (member.Equals(value))
+                {
+					return index == array.Length-1? -1: index + 1;
+                }
+				index++;
+            }
+			return -1;
+        }
+
 		public static T[] Append<T>(this T[] array, T[] appendArray)
         {
 			T[] newArray = new T[array.Length + appendArray.Length];
-
+			int n = 0;
 			for(int i = 0; i < array.Length; i++)
             {
 				newArray[i] = array[i];
             }
 			for(int i = array.Length; i < newArray.Length; i++)
             {
-				newArray[i] = appendArray[i];
+				newArray[i] = appendArray[n];
+				n++;
             }
 
 			return newArray;
