@@ -117,13 +117,10 @@ namespace CSVJSONLib
                             
                             if(table != null)
                             {
-                                foreach (CSVAddress tableAddress in table.Addresses)
+                                _reportContainer.AddTable(table);
+                                foreach (ICSVAddress addr in table.Addresses)
                                 {
-                                    _reportContainer.AddTable(table);
-                                    foreach (ICSVAddress addr in table.Addresses)
-                                    {
-                                        MarkInspected(addr);
-                                    }
+                                    MarkInspected(addr);
                                 }
                                 continue;
                             }

@@ -82,5 +82,15 @@ namespace CSVJSONLib
             }
 			return true;
         }
+
+		public static T[] SubArray<T>(this T[,] array, int row, int col, int rowWidth)
+        {
+			T[] newArray = new T[rowWidth];
+			for(int i = 0; i < rowWidth; i++)
+            {
+				newArray[i] = array[row, col + i];
+            }
+			return newArray;
+        }
 	}
 }
