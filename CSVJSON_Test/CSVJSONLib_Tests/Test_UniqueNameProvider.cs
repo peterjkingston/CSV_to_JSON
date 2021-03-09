@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSVJSON_Test
+namespace CSVJSONLib_Tests
 {
     [TestClass]
     public class Test_UniqueNameProvider

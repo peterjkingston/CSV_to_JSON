@@ -8,21 +8,36 @@ namespace CSVJSONLib
 {
     public class UniqueNameProvider : IUniqueNameProvider
     {
-        public string FirstNumericTerminator { get; private set; }
         const char NUMERIC_DELIMITER = '-';
         const string DEFAULT_NAME = "Undefined Parameter-1";
 
         public string GetUniqueName(string[] names, string preferredName)
         {
-            if (!names.Contains(preferredName))
+            if(preferredName.Trim() != string.Empty)
             {
-                return preferredName;
+                if (!names.Contains(preferredName))
+                {
+                    return preferredName;
+                }
+                else
+                {
+                    string newName = preferredName;
+                    while (names.Contains(newName))
+                    {
+                        newName = HasNumericTerminator(newName) ? NextNumericTerminator(newName) : FirstNumericTerminator(newName);
+                    }
+                    return newName;
+                }
             }
             else
             {
-                string newName = HasNumericTerminator(preferredName) ? NextNumericTerminator(preferredName) : FirstNumericTerminator;
-                return newName;
+                return GetUniqueName(names);
             }
+        }
+
+        private string FirstNumericTerminator(string newName)
+        {
+            return newName + NUMERIC_DELIMITER + "1";
         }
 
         private string NextNumericTerminator(string preferredName_withNumeric)
@@ -33,7 +48,7 @@ namespace CSVJSONLib
 
             string preferredOnly = preferredName_withNumeric.Substring(0, indexStartNumeric);
             int numeric = int.Parse(preferredName_withNumeric.Split(NUMERIC_DELIMITER).Last());
-            return string.Concat(preferredOnly, NUMERIC_DELIMITER, numeric++);
+            return string.Concat(preferredOnly, NUMERIC_DELIMITER, ++numeric);
         }
 
         private bool HasNumericTerminator(string preferredName)

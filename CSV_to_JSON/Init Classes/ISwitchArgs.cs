@@ -1,6 +1,8 @@
 ﻿namespace CSV_to_JSON
 {
-	internal interface ISwitchArgs
-	{
-	}
+    public interface ISwitchArgs
+    {
+        string TargetFilePath { get; }
+        string OutputFile { get; }
+    }
 }

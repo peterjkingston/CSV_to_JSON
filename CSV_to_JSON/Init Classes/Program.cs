@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace CSV_to_JSON
 {
-	class Program
+	public class Program
 	{
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			IContainer container = Containerization.BuildContainer(args);
-			container.Resolve<IApplication>();
+			container.Resolve<IApplication>().Run();
 		}
 	}
 }

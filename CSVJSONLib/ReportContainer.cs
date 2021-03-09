@@ -26,15 +26,14 @@ namespace CSVJSONLib
         public void AddProperty(string propertyName, string propertyValue)
         {
             string[] existingNames = GetExistingNames();
-            if (propertyName.Trim() != string.Empty && propertyValue.Trim() != string.Empty)
-                Properties.Add(_nameProvider.GetUniqueName(existingNames, propertyName), propertyValue);
+            Properties.Add(_nameProvider.GetUniqueName(existingNames, propertyName), propertyValue);
         }
 
         private string[] GetExistingNames()
         {
             string[] propNames = Properties.Count > 0? Properties.Keys.ToArray() : new string[0];
             string[] tableNames = Tables.Count > 0 ? Tables.Keys.ToArray() : new string[0];
-            propNames.Append(tableNames);
+            propNames = propNames.Append(tableNames);
             return propNames;
         }
 

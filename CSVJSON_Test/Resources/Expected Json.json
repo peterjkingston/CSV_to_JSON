@@ -1,0 +1,183 @@
+{
+  "Date of Report": "1/2/07 - 1/5/2007",
+  "Undefined Parameter-1": "This report header, has commas in it",
+  "Lbs / Gallon 68�": "69.35",
+  "Line": "1",
+  "Lbs / Gallon 65�": "65.38",
+  "Lbs / Gallon of 50�": "46.97",
+  "Average Val:": "12.45",
+  "Wt. Of one gallon": "8.73975",
+  "wt. Of measure one gallon.": "1.0884",
+  "Total gallons raw": "63,936.61",
+  "Total input raw lbs": "558,790.00",
+  "Total raw input lbs of measure": "69,588.61",
+  "Input lbs of measure after processing loss": "69,588.61",
+  "Total IN Lbs.": "559,305.00",
+  "Total IN as lbs of measure": "69,812.68",
+  "Total OUT as Lbs.": "95,007.60",
+  "Total OUT as lbs of measure": "61,047.82",
+  "Total OUT as Gallons": "8,064.44",
+  "Total Gallons from raw fruit": "8,034.84",
+  "Lbs of raw fruit / Gallon": "69.55",
+  "YIELD % OUT measure/ IN  measure with rework": "87.45%",
+  "Finished Product Average": "Weight of One Gallon",
+  "measure in One Gallon": "Total lbs",
+  "[PLACEHOLDER #5]": "[PLACEHOLDER #5]\r",
+  "[PLACEHOLDER #11]": "[PLACEHOLDER #7]\r",
+  "Finished Product Average-1": "Weight of One Gallon",
+  "measure in One Gallon-1": "Total lbs",
+  "(Rework)Total input in lbs": "515",
+  "(Rework)Total intput lbs of measure": "224.07",
+  "(Rework)Total input as Gallons": "29.6",
+  "Special Byproduct Added": "Special Byproduct",
+  "Undefined Parameter-6": "PACKAGING MATERIALS SUMMARY",
+  "Pails": "611",
+  "Drums": "111",
+  "Undefined Parameter-2": [
+    {
+      "RAW INPUT": "Product ABC",
+      "No. Containers": "115",
+      "Container Wt.": "375",
+      "Total Wt.": "43,125.00"
+    },
+    {
+      "RAW INPUT": "Product ABC",
+      "No. Containers": "96",
+      "Container Wt.": "400",
+      "Total Wt.": "38,400.00"
+    },
+    {
+      "RAW INPUT": "Product ABC",
+      "No. Containers": "104",
+      "Container Wt.": "400",
+      "Total Wt.": "41,600.00"
+    },
+    {
+      "RAW INPUT": "Product ABC",
+      "No. Containers": "25",
+      "Container Wt.": "375",
+      "Total Wt.": "9,375.00"
+    },
+    {
+      "RAW INPUT": "Product ABC",
+      "No. Containers": "213",
+      "Container Wt.": "400",
+      "Total Wt.": "85,200.00"
+    },
+    {
+      "RAW INPUT": "Product DEF",
+      "No. Containers": "135",
+      "Container Wt.": "250",
+      "Total Wt.": "33,750.00"
+    }
+  ],
+  "Undefined Parameter-3": [
+    {
+      "PROCESSING LOSSES": "Process1",
+      "(Lbs.)": "",
+      "%": "0.00%"
+    },
+    {
+      "PROCESSING LOSSES": "Process2",
+      "(Lbs.)": "",
+      "%": "0.00%"
+    },
+    {
+      "PROCESSING LOSSES": "Process3",
+      "(Lbs.)": "0",
+      "%": "0.00%"
+    },
+    {
+      "PROCESSING LOSSES": "Process4",
+      "(Lbs.)": "",
+      "%": "0.00%"
+    },
+    {
+      "PROCESSING LOSSES": "Process5",
+      "(Lbs.)": "",
+      "%": "0.00%"
+    },
+    {
+      "PROCESSING LOSSES": "Process6",
+      "(Lbs.)": "",
+      "%": "0.00%"
+    },
+    {
+      "PROCESSING LOSSES": "Process7",
+      "(Lbs.)": "0",
+      "%": "0.00%"
+    },
+    {
+      "PROCESSING LOSSES": "Process8",
+      "(Lbs.)": "2,793.95",
+      "%": "0.50%"
+    }
+  ],
+  "Undefined Parameter-4": [
+    {
+      "PACKED": "OutProduct ABC",
+      "No. Containers": "257",
+      "lbs. Per cont.": "50.1",
+      "brix": "45",
+      "Total lbs": "12,875.70",
+      "Output Gallons": "765.54",
+      "Lbs. Of measure": "5,795.16"
+    },
+    {
+      "PACKED": "OutProduct ABC",
+      "No. Containers": "144",
+      "lbs. Per cont.": "55.6",
+      "brix": "68",
+      "Total lbs": "8,006.40",
+      "Output Gallons": "719.35",
+      "Lbs. Of measure": "5,445.50"
+    },
+    {
+      "PACKED": "OutProduct ABC",
+      "No. Containers": "111",
+      "lbs. Per cont.": "556.5",
+      "brix": "68",
+      "Total lbs": "61,771.50",
+      "Output Gallons": "5,550.00",
+      "Lbs. Of measure": "42,013.50"
+    },
+    {
+      "PACKED": "OutProduct ABC",
+      "No. Containers": "210",
+      "lbs. Per cont.": "54.9",
+      "brix": "65",
+      "Total lbs": "11,529.00",
+      "Output Gallons": "990.07",
+      "Lbs. Of measure": "7,494.85"
+    },
+    {
+      "PACKED": "ByProduct ABC",
+      "No. Containers": "1",
+      "lbs. Per cont.": "500",
+      "brix": "50",
+      "Total lbs": "500",
+      "Output Gallons": "33.03",
+      "Lbs. Of measure": "250.05"
+    },
+    {
+      "PACKED": "ByProduct ABC",
+      "No. Containers": "1",
+      "lbs. Per cont.": "325",
+      "brix": "15",
+      "Total lbs": "325",
+      "Output Gallons": "6.44",
+      "Lbs. Of measure": "48.77"
+    }
+  ],
+  "Undefined Parameter-5": [
+    {
+      "REPROCESSED": "OutProduct ABC",
+      "No. Containers": "1",
+      "lbs. Per cont.": "515",
+      "brix": "43.5",
+      "Total lbs": "515",
+      "Output Gallons": "29.6",
+      "Lbs. Of measure": "224.07"
+    }
+  ]
+}

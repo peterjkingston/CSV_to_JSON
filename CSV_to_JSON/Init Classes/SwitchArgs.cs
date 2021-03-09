@@ -1,13 +1,32 @@
-﻿namespace CSV_to_JSON
-{
-	internal class SwitchArgs : ISwitchArgs 
-	{
-		private string[] args;
-		public string TargetFilePath { get; }
+﻿using CSVJSONLib;
+using System;
+using System.IO;
+using System.Linq;
 
-		public SwitchArgs(string[] args)
+namespace CSV_to_JSON
+{
+	public class SwitchArgs : ISwitchArgs 
+	{
+		public string TargetFilePath { get; }
+		public string OutputFile { get; }
+
+        public SwitchArgs(string[] args)
 		{
-			TargetFilePath = args.Length > 0 ? args[0] : "";
+            try
+            {
+				FileInfo targetFileInfo = new FileInfo(args[0]);
+				TargetFilePath = targetFileInfo.Exists ? targetFileInfo.FullName : "";
+
+				if(args.Contains("-o"))
+                {
+					FileInfo outputInfo = new FileInfo(args[args.IndexAfter("-o")]);
+					OutputFile = outputInfo.FullName;
+				}
+			}
+			catch(Exception ex)
+            {
+				Console.WriteLine(ex.Message);
+            }
 		}
 	}
 }

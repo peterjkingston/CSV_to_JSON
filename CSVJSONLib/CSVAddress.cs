@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CSVJSONLib
 {
@@ -29,6 +30,10 @@ namespace CSVJSONLib
 
         public bool IsStandAlone()
         {
+            if (this.Value.IsNumeric())
+            {
+                return false;
+            }
             bool isntLeftLabel = !IsLeftLabel();
             bool isntTableHeader = !IsTableHeader();
             bool isntTopLabel = !IsTopLabel();
@@ -42,11 +47,22 @@ namespace CSVJSONLib
 
         public bool ContainsLabel()
         {
-            return _csvReport[this.Row, this.Column].Contains(":");
+            if (this.Value.IsNumeric())
+            {
+                return false;
+            }
+            bool hasDelimiter = _csvReport[this.Row, this.Column].Contains(":");
+            bool hasValueAfterDelmiter = _csvReport[Row, Column].Split(':').Last().Trim() != string.Empty;
+
+            return hasDelimiter && hasValueAfterDelmiter;
         }
 
         public bool IsTopLabel()
         {
+            if (this.Value.IsNumeric())
+            {
+                return false;
+            }
             bool isntBottomRow = _csvReport.GetUpperBound(0) > this.Row;
             bool hasValueBelow = false;
             if (isntBottomRow) 
@@ -68,7 +84,11 @@ namespace CSVJSONLib
 
         public bool IsLeftLabel()
         {
-            
+            if (this.Value.IsNumeric())
+            {
+                return false;
+            }
+
             bool isLeftofRightBoundary = _csvReport.GetLength(1) > this.Column + 1;
             bool hasValueToRight = false;
             if (_csvReport.GetLength(1) != this.Column+1)
@@ -82,7 +102,10 @@ namespace CSVJSONLib
 
         public bool IsTableHeader()
         {
-            
+            if (this.Value.IsNumeric())
+            {
+                return false;
+            }
             bool tableHasAtLeastOneDataRow = false;
             bool reportHasAtLeastThreeMoreColumns = _csvReport.GetLength(1) > this.Column + 2;
             int tableWidth = GetTableWidth();

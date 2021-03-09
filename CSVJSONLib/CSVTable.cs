@@ -32,7 +32,7 @@ namespace CSVJSONLib
             CSVTable table = new CSVTable();
             ICSVAddress topLeftAddess = GoToTopLeftAddress(row, col, csvReport);
             ICSVAddress nextAddress = topLeftAddess;
-            while (nextAddress.IsValid() && !nextAddress.IsBlank())
+            while (nextAddress.IsValid() && !nextAddress.IsBlank() && !nextAddress.Value.IsNumeric())
             {
                 ICSVAddress address = nextAddress;
                 table.AddAddress(address);
@@ -47,31 +47,48 @@ namespace CSVJSONLib
             int endColumns = GetTopRightAddress(row,col,csvReport).Column + 1;
 
             int rowWidth = table.Addresses.Count(); //The current count of the addresses is only the header width: g2g
-            int endRows = topLeftAddess.Row + table.GetRowCount(topLeftAddess, csvReport, (a)=> { return a.IsValid() && !a.IsBlank() && !a.IsZero(); });
+            //int endRows = topLeftAddess.Row + table.GetRowCount(topLeftAddess, csvReport, (a)=> { return a.IsValid() && !a.IsBlank() && !a.IsZero(); });
 
-            int currentCol = topLeftAddess.Column;
+            //Add the headers to the table addresses
+            //for(int header = topLeftAddess.Column; header < endColumns; header++)
+            //{
+            //    table.AddAddress(new CSVAddress(topLeftAddess.Row, header, csvReport));
+            //}
+
+            //int currentCol = topLeftAddess.Column;
             int currentRow = topLeftAddess.Row + 1;
 
-            List<string> record = new List<string>();
-            while (currentRow < endRows)
+            //List<string[]> records = new List<string[]>();
+            string[] record = csvReport.SubArray(currentRow, topLeftAddess.Column, rowWidth);
+            while (!record.OnlyContains(new string[]{ string.Empty, "0" }))
             {
-                CSVAddress address = new CSVAddress(currentRow, currentCol, csvReport);
-                table.AddAddress(address);
-                record.Add(address.Value);
-                currentCol++;
-                if (currentCol >= endColumns)
+                table.AddRecord(record);
+                for(int tableColumn = 0; tableColumn < rowWidth; tableColumn++)
                 {
-                    string[] tuple = record.ToArray();
-                    if (!tuple.OnlyContains(new string[] { string.Empty, "0"}))
-                    {
-                        table.AddRecord(record.ToArray());
-                        record = new List<string>();
-                        currentCol = topLeftAddess.Column;
-                        currentRow++;
-                    }
-                    else break;
+                    table.AddAddress(new CSVAddress(currentRow,topLeftAddess.Column + tableColumn, csvReport));
                 }
+                currentRow++;
+                record = csvReport.SubArray(currentRow, topLeftAddess.Column, rowWidth);
             }
+            //while (currentRow < endRows)
+            //{
+            //    CSVAddress address = new CSVAddress(currentRow, currentCol, csvReport);
+            //    table.AddAddress(address);
+            //    record.Add(address.Value);
+            //    currentCol++;
+            //    if (currentCol >= endColumns)
+            //    {
+            //        string[] tuple = record.ToArray();
+            //        if (!tuple.OnlyContains(new string[] { string.Empty, "0"}))
+            //        {
+            //            table.AddRecord(record.ToArray());
+            //            record = new List<string>();
+            //            currentCol = topLeftAddess.Column;
+            //            currentRow++;
+            //        }
+            //        else break;
+            //    }
+            //}
             if(table.Headers.Count() < 3 || table.Records.Count() < 1)
             {
                 return null;

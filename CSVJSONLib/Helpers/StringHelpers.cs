@@ -39,7 +39,7 @@ namespace CSVJSONLib
 
 		public static bool IsNumeric(this string text)
         {
-			return int.TryParse(text, out int number);
+			return double.TryParse(text, out double number);
         }
 	}
 }

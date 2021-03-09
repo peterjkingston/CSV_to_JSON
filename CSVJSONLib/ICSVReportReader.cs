@@ -5,5 +5,6 @@
         string[,] CsvReport { get; }
 
         IReportContainer GetProperties();
+        void Read(string csvText);
     }
 }

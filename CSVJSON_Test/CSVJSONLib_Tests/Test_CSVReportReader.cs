@@ -8,7 +8,7 @@ using CSVJSONLib;
 using CSVJSON_Test.Dummy_Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CSVJSON_Test
+namespace CSVJSONLib_Tests
 {
     [TestClass]
     public class Test_CSVReportReader
@@ -22,7 +22,8 @@ namespace CSVJSON_Test
             string[] props = { "someProp" };
             string[] vals = { "someVal" };
             IReportContainer reportContainer = new Dummy_ReportContainer(props, vals);
-            CSVReportReader reportReader = new CSVReportReader(_csvText, reportContainer);
+            CSVReportReader reportReader = new CSVReportReader(reportContainer);
+            reportReader.Read(_csvText);
 
             //Act
             IReportContainer actual = reportReader.GetProperties();
@@ -39,7 +40,8 @@ namespace CSVJSON_Test
             string[] props = { "" };
             string[] vals = { "" };
             IReportContainer reportContainer = new Dummy_ReportContainer(props, vals);
-            CSVReportReader reportReader = new CSVReportReader("", null);
+            CSVReportReader reportReader = new CSVReportReader(null);
+            reportReader.Read("");
 
             //Act
             IReportContainer actual = reportReader.GetProperties();
