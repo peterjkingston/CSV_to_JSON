@@ -52,12 +52,14 @@ namespace CSV_to_JSON
             //Arrange
             string targetFilePath = @"..\..\Resources\Sample Report.csv";
             string newFile = Path.Combine(Path.GetDirectoryName(targetFilePath), @"Sample Report.json");
+            string expectedJsonPath = @"..\..\Resources\Expected Json.json";
+            string expectedJson = File.ReadAllText(expectedJsonPath);
             bool expected = true;
 
             //Act
             Program.Main(new string[] { targetFilePath, "-o", newFile });
-
-            bool actual = false;
+            string resultJson = File.ReadAllText(newFile);
+            bool actual = resultJson == expectedJson;
 
             //Assert
             Assert.AreEqual(expected, actual);

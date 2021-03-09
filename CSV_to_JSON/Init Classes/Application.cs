@@ -26,7 +26,7 @@ namespace CSV_to_JSON
         {
             try
             {
-                _reportReader.Read(File.ReadAllText(_switchArgs.TargetFilePath));
+                _reportReader.Read(File.ReadAllText(_switchArgs.TargetFilePath,Encoding.GetEncoding(1252)));
                 IReportContainer reportContainer = _reportReader.GetProperties();
 
                 if (_switchArgs.OutputFile != string.Empty)
