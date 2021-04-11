@@ -112,22 +112,6 @@ namespace CSV_to_JSON.Init_Classes
 
     public static class pseudoclass
     {
-        public static bool EqualArray<T>(this T[] inArray, T[] otherArray)
-        {
-            if(inArray.Length != otherArray.Length)
-            {
-                return false;
-            }
 
-            for(int i = 0; i < inArray.Length ; i++)
-            {
-                if(!inArray[i].Equals(otherArray[i]))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
     }
 }

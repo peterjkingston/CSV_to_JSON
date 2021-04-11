@@ -1,4 +1,5 @@
 ﻿using CSV_to_JSON;
+using CSVJSONLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using System;
@@ -81,19 +82,8 @@ namespace CSV_to_JSON
             //Act
             Program.Main(new string[] { targetFilePath, "-o", newFile, "-e", "Windows-1252" });
             string resultJson = File.ReadAllText(newFile);
-            bool anyisFalse = false;
-            foreach(Func<string,bool> check in checks)
-            {
-                if (!check(resultJson))
-                {
-                    anyisFalse = false;
-                    break;
-                }
-                else
-                {
-                    anyisFalse = true;
-                }
-            }
+            bool anyisFalse = checks.EachTrue(resultJson);
+            
             bool actual = anyisFalse;
 
             //Assert

@@ -92,5 +92,42 @@ namespace CSVJSONLib
             }
 			return newArray;
         }
+
+		public static bool EqualArray<T>(this T[] inArray, T[] otherArray)
+		{
+			if (inArray.Length != otherArray.Length)
+			{
+				return false;
+			}
+
+			for (int i = 0; i < inArray.Length; i++)
+			{
+				if (!inArray[i].Equals(otherArray[i]))
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public static bool EachTrue<T>(this Func<T,bool>[] funcs, T toEach)
+        {
+			bool eachTrue = false;
+            foreach (Func<T,bool> func  in funcs)
+            {
+                if (!func(toEach))
+                {
+					eachTrue = false;
+					break;
+                }
+                else
+                {
+					eachTrue = true;
+                }
+            }
+
+			return eachTrue;
+        }
 	}
 }
