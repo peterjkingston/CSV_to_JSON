@@ -1,33 +1,33 @@
 Date of Report: 1/2/07 - 1/5/2007,,,,"This report header, has commas in it",,,Lbs / Gallon 68°,69.35,,,,,
-,,,,,Line 1,,Lbs / Gallon 65°,65.38,,,,,
+,This data has a “ double quote in it,,,,Line 1,,Lbs / Gallon 65°,65.38,,,,,
 ,,,,,,,Lbs / Gallon of 50°,46.97,,,,,
 RAW INPUT,No. Containers,Container Wt.,Total Wt.,,,,Average Val:,12.45,,,,,
-Product ABC,115,375,"43,125.00",,,,Wt. Of one gallon,8.73975,,,,,
-Product ABC,96,400,"38,400.00",,,,wt. Of measure one gallon.,1.0884,,,,,
-Product ABC,104,400,"41,600.00",,,,Total gallons raw,"63,936.61",,,,,
-Product ABC,25,375,"9,375.00",,,,Total input raw lbs,"558,790.00",,,,,
-Product ABC,213,400,"85,200.00",,,,Total raw input lbs of measure,"69,588.61",,,,,
-Product DEF,135,250,"33,750.00",,,,Input lbs of measure after processing loss,"69,588.61",,,,,
-,,,,,,,Total IN Lbs.,"559,305.00",,,,,
-PROCESSING LOSSES,(Lbs.),%,,,,,Total IN as lbs of measure,"69,812.68",,,,,
-Process1,,0.00%,,,,,Total OUT as Lbs.,"95,007.60",,,,,
-Process2,,0.00%,,,,,Total OUT as lbs of measure,"61,047.82",,,,,
-Process3,0,0.00%,,,,,Total OUT as Gallons,"8,064.44",,,,,
-Process4,,0.00%,,,,,Total Gallons from raw fruit,"8,034.84",,,,,
+Product ABC,115,375,43125,,,,Wt. Of one gallon,8.73975,,,,,
+Product ABC,96,400,38400,,,,wt. Of measure one gallon.,1.0884,,,,,
+Product ABC,104,400,41600,,,,Total gallons raw,63936.61,,,,,
+Product ABC,25,375,9375,,,,Total input raw lbs,558790,,,,,
+Product ABC,213,400,85200,,,,Total raw input lbs of measure,69588.61,,,,,
+Product DEF,135,250,33750,,,,Input lbs of measure after processing loss,69588.61,,,,,
+,,,,,,,Total IN Lbs.,559305,,,,,
+PROCESSING LOSSES,(Lbs.),%,,,,,Total IN as lbs of measure,69812.68,,,,,
+Process1,,0.00%,,,,,Total OUT as Lbs.,95007.6,,,,,
+Process2,,0.00%,,,,,Total OUT as lbs of measure,61047.82,,,,,
+Process3,0,0.00%,,,,,Total OUT as Gallons,8064.44,,,,,
+Process4,,0.00%,,,,,Total Gallons from raw fruit,8034.84,,,,,
 Process5,,0.00%,,,,,Lbs of raw fruit / Gallon,69.55,,,,,
 Process6,,0.00%,,,,,YIELD % OUT measure/ IN  measure with rework,87.45%,,,,,
 Process7,0,0.00%,,,,,,,,,,,
-Process8,"2,793.95",0.50%,,,,,,,,,,,
+Process8,2793.95,0.50%,,,,,,,,,,,
 ,,,,,,,,,,,,,
 ,,,,,,,,,,,,,
 ,,,,Finished Product Average,,68,,,,,,,
 ,,,,Weight of One Gallon,,11.13,,,,,,,
 ,,,,measure in One Gallon,,7.57,,,,,,,
 PACKED,No. Containers,lbs. Per cont.,brix,Total lbs,Output Gallons,Lbs. Of measure,,,,,,,
-OutProduct ABC,257,50.1,45,"12,875.70",765.54,"5,795.16",,,,33.15364854,765.54,812.1,"1,130.32"
-OutProduct ABC,144,55.6,68,"8,006.40",719.35,"5,445.50",,,,55.6,719.35,763.1,"1,062.12"
-OutProduct ABC,111,556.5,68,"61,771.50","5,550.00","42,013.50",,,,556.5,"5,550.00","5,887.54","8,194.56"
-OutProduct ABC,210,54.9,65,"11,529.00",990.07,"7,494.85",,,,52.47383513,990.07,"1,050.29","1,461.84"
+OutProduct ABC,257,50.1,45,12875.7,765.54,5795.16,,,,33.15364854,765.54,812.1,1130.32
+OutProduct ABC,144,55.6,68,8006.4,719.35,5445.5,,,,55.6,719.35,763.1,1062.12
+OutProduct ABC,111,556.5,68,61771.5,5550,42013.5,,,,556.5,5550,5887.54,8194.56
+OutProduct ABC,210,54.9,65,11529,990.07,7494.85,,,,52.47383513,990.07,1050.29,1461.84
 ByProduct ABC,1,500,50,500,33.03,250.05,,,,367.6410596,33.03,35.04,48.77
 ByProduct ABC,1,325,15,325,6.44,48.77,,,,71.70308154,6.44,6.83,9.51
 ,,,,0,0,0,,,,0,0,0,0
@@ -50,6 +50,6 @@ OutProduct ABC,1,515,43.5,515,29.6,224.07,,,,,329.4522522,,
 ,,,,0,0,0,,,,,0,,
 ,,,,0,0,0,,,,,0,,
 ,,,,,,,Special Byproduct Added,,,,,,
-,,,,,,,Special Byproduct,"4,125.00",,,,,
+,,,,,,,Special Byproduct,4125,,,,,
 PACKAGING MATERIALS SUMMARY,,Pails,611,,,,,,,,,,
 ,,Drums,111,,,,,,,,,,

@@ -52,6 +52,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CSVJSONLib_Tests\Test_FH_ReportReader.cs" />
     <Compile Include="CSV_to_JSON_Tests\Test_Containerized_Thoughput.cs" />
     <Compile Include="CSV_to_JSON_Tests\Test_OutputHandler.cs" />
     <Compile Include="CSV_to_JSON_Tests\Test_SwitchArgs.cs" />
@@ -72,10 +73,12 @@
     <Compile Include="CSVJSONLib_Tests\Test_UniqueNameProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Resources\DUMMY_JSON_REPORT.json" />
     <None Include="Resources\Expected Json.json" />
     <None Include="Resources\Sample Report.csv" />
+    <None Include="Resources\Sample Report.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSVJSONLib\CSVJSONLib.csproj">

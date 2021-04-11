@@ -57,9 +57,44 @@ namespace CSV_to_JSON
             bool expected = true;
 
             //Act
-            Program.Main(new string[] { targetFilePath, "-o", newFile });
+            Program.Main(new string[] { targetFilePath, "-o", newFile, "-e", "Windows-1252" });
             string resultJson = File.ReadAllText(newFile);
             bool actual = resultJson == expectedJson;
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Main_OutputContainsSpecialCharacters_GivenSampleFile()
+        {
+            //Arrange
+            string targetFilePath = @"..\..\Resources\Sample Report.csv";
+            string newFile = Path.Combine(Path.GetDirectoryName(targetFilePath), @"Sample Report.json");
+            Func<string, bool>[] checks =
+            {
+                (t) => { return t.Contains('°'); },
+                (t) => { return t.Contains('“'); }
+            };
+            bool expected = true;
+
+            //Act
+            Program.Main(new string[] { targetFilePath, "-o", newFile, "-e", "Windows-1252" });
+            string resultJson = File.ReadAllText(newFile);
+            bool anyisFalse = false;
+            foreach(Func<string,bool> check in checks)
+            {
+                if (!check(resultJson))
+                {
+                    anyisFalse = false;
+                    break;
+                }
+                else
+                {
+                    anyisFalse = true;
+                }
+            }
+            bool actual = anyisFalse;
 
             //Assert
             Assert.AreEqual(expected, actual);

@@ -36,7 +36,7 @@ namespace CSVJSONLib
 
                 string[] rows = csvText.Trim().Split('\n');
                 int rowCount = rows.Length;
-                int columnCount = rows[0].DoubleQuoteSplit(comma).Length;
+                int columnCount = rows[0].Trim(new char[] { '\r' }).DoubleQuoteSplit(comma).Length;
                 int c = 0;
                 string[,] result = new string[rowCount, columnCount];
                 for (int row = 0; row < rowCount; row++)

@@ -5,5 +5,7 @@
         void ToOutputStream(string outputObj);
         void OutputError(string errorMessage);
         void PrintToFile(string outputObj, string toFilePath);
+        void PrintToFile(byte[] vs, string outputFile);
+        void ToOutputStream(byte[] vs);
     }
 }

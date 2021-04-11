@@ -1,4 +1,5 @@
 ﻿using CSV_to_JSON;
+using System.Text;
 
 namespace CSV_to_JSON_Tests
 {
@@ -12,6 +13,7 @@ namespace CSV_to_JSON_Tests
         public string TargetFilePath { get; private set; }
 
         public string OutputFile { get { return "SomeOutputFile.json"; } }
-            
+
+        public Encoding TargetFileEncoding => Encoding.GetEncoding(1252);
     }
 }
