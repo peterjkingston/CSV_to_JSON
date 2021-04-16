@@ -73,6 +73,21 @@ namespace CSVJSONLib
 
 		public static bool OnlyContains<T>(this T[] array, T[] allowed)
         {
+			//if(array is string[])
+			//{
+			//	foreach(T arrayMember in array)
+			//	{
+			//		string member = arrayMember as string;
+			//		string[] allowedItems = allowed as string[];
+			//		string value = member.IsNumeric() ? Int64.Parse(member,System.Globalization.NumberStyles.AllowDecimalPoint).ToString() : member;
+			//		if (!allowedItems.Contains(value))
+			//		{
+			//			return false;
+			//		}
+			//	}
+			//	return true;
+			//}
+
 			foreach(T arrayMember in array)
             {
                 if (!allowed.Contains(arrayMember))
@@ -83,14 +98,43 @@ namespace CSVJSONLib
 			return true;
         }
 
+		public static bool OnlyContains<T>(this T[] array, Func<T,bool>[] qualifiers)
+		{
+			bool[] passes = new bool[array.Length];
+
+			for(int i = 0; i < array.Length; i++)
+			{
+				T member = array[i];
+				bool pass = false;
+				//If this member passes any of the qualifiers, he passes
+				foreach (Func<T,bool> qualifier in qualifiers)
+				{
+					pass = qualifier(member) ? true: pass;
+				}
+				passes[i] = pass;
+			}
+
+			return passes.All((v) => v == true);
+		}
+
 		public static T[] SubArray<T>(this T[,] array, int row, int col, int rowWidth)
         {
-			T[] newArray = new T[rowWidth];
-			for(int i = 0; i < rowWidth; i++)
-            {
-				newArray[i] = array[row, col + i];
-            }
-			return newArray;
+			try
+			{
+				T[] newArray = new T[rowWidth];
+				for (int i = 0; i < rowWidth; i++)
+				{
+					newArray[i] = array[row, col + i];
+				}
+				return newArray;
+			}
+			catch(IndexOutOfRangeException ex)
+			{
+				ex.HelpLink += $"@row = {row}\n" +
+							   $"@col = {col}\n" +
+							   $"@rowWidth = {rowWidth}";
+				throw;
+			}
         }
 	}
 }

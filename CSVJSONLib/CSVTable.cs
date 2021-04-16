@@ -42,6 +42,10 @@ namespace CSVJSONLib
               
                 nextAddress = new CSVAddress(address.Row, address.Column + 1, csvReport);
             }
+            if(table.Headers.Count() < 3)
+			{
+                return null;
+			}
 
             //int columnDepth = table.GetLongestColumn(csvReport, (r, c, report) => { return report[r, c] != string.Empty; });
             int endColumns = GetTopRightAddress(row,col,csvReport).Column + 1;
@@ -60,7 +64,14 @@ namespace CSVJSONLib
 
             //List<string[]> records = new List<string[]>();
             string[] record = csvReport.SubArray(currentRow, topLeftAddess.Column, rowWidth);
-            while (!record.OnlyContains(new string[]{ string.Empty, "0" }))
+            //while (!record.OnlyContains(new string[]{ string.Empty, "0" }))
+            while (!record.OnlyContains(new Func<string, bool>[]
+                {
+                    (s) =>  s == string.Empty,
+                    (s) =>  s == "0",
+                    (s) =>  s.IsNumeric() && double.Parse(s) == 0
+                }
+            ))
             {
                 table.AddRecord(record);
                 for(int tableColumn = 0; tableColumn < rowWidth; tableColumn++)
@@ -89,7 +100,7 @@ namespace CSVJSONLib
             //        else break;
             //    }
             //}
-            if(table.Headers.Count() < 3 || table.Records.Count() < 1)
+            if(table.Records.Count() < 1)
             {
                 return null;
             }
