@@ -11,10 +11,12 @@ namespace CSVJSONLib
         public string[,] CsvReport { get; private set; }
         bool[,] _inspected;
         private IReportContainer _reportContainer;
+		private IUniqueNameProvider _nameProvider;
 
-        public CSVReportReader(IReportContainer reportContainer)
+		public CSVReportReader(IReportContainer reportContainer, IUniqueNameProvider nameProvider)
         {
-            _reportContainer = reportContainer == null ? new ReportContainer(new UniqueNameProvider()): reportContainer ;
+            _reportContainer = reportContainer == null ? new ReportContainer(nameProvider): reportContainer ;
+            _nameProvider = nameProvider;
         }
 
         public void Read(string csvText)
@@ -113,7 +115,7 @@ namespace CSVJSONLib
                         //If the cell is part of a table
                         if (address.IsTableHeader())
                         {
-                            CSVTable table = CSVTable.FindTable(row, col, CsvReport);
+                            CSVTable table = CSVTable.FindTable(_nameProvider, row, col, CsvReport);
                             
                             if(table != null)
                             {
