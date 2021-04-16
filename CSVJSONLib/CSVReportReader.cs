@@ -11,8 +11,9 @@ namespace CSVJSONLib
         public string[,] CsvReport { get; private set; }
         bool[,] _inspected;
         private IReportContainer _reportContainer;
+		private Dictionary<string, string> _quotedDatas;
 
-        public CSVReportReader(IReportContainer reportContainer)
+		public CSVReportReader(IReportContainer reportContainer)
         {
             _reportContainer = reportContainer == null ? new ReportContainer(new UniqueNameProvider()): reportContainer ;
         }
@@ -33,6 +34,8 @@ namespace CSVJSONLib
                 char enq = (char)5;
                 char esc = (char)27;
                 char comma = ',';
+                csvText = csvText.Replace("#REF!", string.Empty);
+                csvText = ReplaceDoubleQuotedData(csvText, comma);
 
                 string[] rows = csvText.Trim().Split('\n');
                 int rowCount = rows.Length;
@@ -41,7 +44,7 @@ namespace CSVJSONLib
                 string[,] result = new string[rowCount, columnCount];
                 for (int row = 0; row < rowCount; row++)
                 {
-                    string cell = rows[row];
+                    string cell = ReturnPlaceholderData(rows[row]);
                     if (cell != string.Empty)
                     {
                         if (cell.Contains(ddQuotes)) cell.Replace(ddQuotes, new string(new char[] { enq }));
@@ -77,7 +80,48 @@ namespace CSVJSONLib
             }
         }
 
-        public IReportContainer GetProperties()
+		private string ReplaceDoubleQuotedData(string csvText, char delimiter)
+		{
+            string[] easyQuotes = csvText.Split('\"');
+            string tempText = csvText;
+            _quotedDatas = new Dictionary<string, string>();
+
+            for (int index = 1; index < easyQuotes.Length; index += 2)
+            {
+                string quotedData = easyQuotes[index];
+                string placeHolder = "[PLACEHOLDER #" + index + "]";
+                _quotedDatas.Add(placeHolder, quotedData);
+                tempText = tempText.Replace('\"' + quotedData + '\"', placeHolder);
+            }
+
+            return tempText;
+
+            //string[] result = tempText.Split(delimiter);
+            //foreach (string placeHolder in _quotedDatas.Keys)
+            //{
+            //    for (int column = 0; column < result.Length; column++)
+            //    {
+            //        if (result[column] == placeHolder)
+            //        {
+            //            result[column] = quotedDatas[placeHolder];
+            //        }
+            //    }
+            //}
+
+            //return result.Concat();
+        }
+
+        private string ReturnPlaceholderData(string text)
+		{
+			if (_quotedDatas.ContainsKey(text))
+			{
+                text = _quotedDatas[text];
+			}
+
+            return text;
+		}
+
+		public IReportContainer GetProperties()
         {
             if(_reportContainer == null)
             {
