@@ -1,4 +1,5 @@
-﻿using CSVJSONLib;
+﻿using CSVJSON_Test.Dummy_Classes;
+using CSVJSONLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using System;
@@ -26,7 +27,7 @@ namespace CSVJSONLib_Tests
             };
 
             //Act
-            ICSVTable actual = CSVTable.FindTable(1, 1, sampleReport);
+            ICSVTable actual = CSVTable.FindTable(new Dummy_UniqueNameProvider(),1, 1, sampleReport);
 
             //Assert
             Assert.IsNotNull(actual);
@@ -46,7 +47,7 @@ namespace CSVJSONLib_Tests
             };
 
             //Act
-            ICSVTable actual = CSVTable.FindTable(1, 1, sampleReport);
+            ICSVTable actual = CSVTable.FindTable(new Dummy_UniqueNameProvider(),1, 1, sampleReport);
 
             //Assert
             Assert.IsNull(actual);
@@ -64,7 +65,7 @@ namespace CSVJSONLib_Tests
                 { "", ""       ,"0"      , "0"        , "" },
                 { "",""        ,""       ,""          , "" }
             };
-            ICSVTable table = CSVTable.FindTable(1, 1, sampleReport);
+            ICSVTable table = CSVTable.FindTable(new Dummy_UniqueNameProvider(),1, 1, sampleReport);
             bool expected = true;
 
             //Act
@@ -86,7 +87,7 @@ namespace CSVJSONLib_Tests
                 { "", ""       ,"0"      , "0"        , "" },
                 { "",""        ,""       ,""          , "" }
             };
-            IJSONConvertable table = CSVTable.FindTable(1, 1, sampleReport);
+            IJSONConvertable table = CSVTable.FindTable(new Dummy_UniqueNameProvider(),1, 1, sampleReport);
             string jsonSample = "[{\"Header1\":\"\",  \"Header2\":\"Jank\", \"Header3\":\"0\"}]";
             JToken jsonSampleArray = JArray.Parse(jsonSample);
             bool expected = true;
