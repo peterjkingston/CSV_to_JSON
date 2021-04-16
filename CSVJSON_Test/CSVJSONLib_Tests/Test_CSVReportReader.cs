@@ -22,7 +22,7 @@ namespace CSVJSONLib_Tests
             string[] props = { "someProp" };
             string[] vals = { "someVal" };
             IReportContainer reportContainer = new Dummy_ReportContainer(props, vals);
-            CSVReportReader reportReader = new CSVReportReader(reportContainer);
+            CSVReportReader reportReader = new CSVReportReader(reportContainer, new Dummy_UniqueNameProvider());
             reportReader.Read(_csvText);
 
             //Act
@@ -40,7 +40,7 @@ namespace CSVJSONLib_Tests
             string[] props = { "" };
             string[] vals = { "" };
             IReportContainer reportContainer = new Dummy_ReportContainer(props, vals);
-            CSVReportReader reportReader = new CSVReportReader(null);
+            CSVReportReader reportReader = new CSVReportReader(null, new Dummy_UniqueNameProvider());
             reportReader.Read("");
 
             //Act

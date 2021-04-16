@@ -26,7 +26,7 @@ namespace CSVJSONLib
         private List<string> _headers = new List<string>();
         private List<string[]> _records = new List<string[]>();
 
-        public static CSVTable FindTable(int row, int col, string[,] csvReport)
+        public static CSVTable FindTable(IUniqueNameProvider _nameProvider, int row, int col, string[,] csvReport)
         {
 
             CSVTable table = new CSVTable();
@@ -38,7 +38,7 @@ namespace CSVJSONLib
                 table.AddAddress(address);
 
                 //Add the header while you're at it
-                table.AddHeader(address.Value);
+                table.AddHeader(_nameProvider.GetUniqueName(table.Headers.ToArray(), address.Value));
               
                 nextAddress = new CSVAddress(address.Row, address.Column + 1, csvReport);
             }
@@ -76,10 +76,14 @@ namespace CSVJSONLib
                 table.AddRecord(record);
                 for(int tableColumn = 0; tableColumn < rowWidth; tableColumn++)
                 {
-                    table.AddAddress(new CSVAddress(currentRow,topLeftAddess.Column + tableColumn, csvReport));
+                    table.AddAddress(new CSVAddress(currentRow, topLeftAddess.Column + tableColumn, csvReport));
                 }
                 currentRow++;
-                record = csvReport.SubArray(currentRow, topLeftAddess.Column, rowWidth);
+                if(currentRow < csvReport.GetLength(0))
+				{
+                    record = csvReport.SubArray(currentRow, topLeftAddess.Column, rowWidth);
+				}
+				else { break; }
             }
             //while (currentRow < endRows)
             //{

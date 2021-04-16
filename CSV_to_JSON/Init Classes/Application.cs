@@ -36,7 +36,7 @@ namespace CSV_to_JSON
             }
             catch (Exception ex)
             {
-                _outputHandler.OutputError($"{ex.Message}\n\n{ex.StackTrace}");
+                _outputHandler.OutputError($"{_switchArgs.TargetFilePath}\n\n{ex.Message}\n\n{ex.StackTrace}");
             }
         }
 	}
